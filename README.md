@@ -1,2 +1,0 @@
-# iTalent
-My iTalent page 
