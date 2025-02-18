@@ -284,8 +284,6 @@ p, .tm-text-gray { color: #999; }
 .tm-video-item img {
     position: relative;
     display: block;
-    min-height: 100%;
-    max-width: 100%;
     opacity: 0.8;
     width: 600px;
     height: 400px;
