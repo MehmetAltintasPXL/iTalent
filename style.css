@@ -22,15 +22,21 @@ body {
   transition: background var(--transition), color var(--transition);
 }
 nav {
-  background: var(--nav-bg);
+  backdrop-filter: blur(8px) saturate(1.2);
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  animation: navFadeIn 0.7s cubic-bezier(.4,2,.6,1) 1;
   color: var(--nav-text);
   display: flex;
   align-items: center;
   padding: 0.5rem 2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   position: sticky;
   top: 0;
   z-index: 100;
+}
+@keyframes navFadeIn {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 nav ul {
   list-style: none;
@@ -43,12 +49,30 @@ nav ul li {
   position: relative;
 }
 nav ul li a {
+  position: relative;
+  overflow: hidden;
   color: var(--nav-text);
   text-decoration: none;
   font-weight: 500;
   padding: 0.5rem 0.75rem;
   border-radius: 4px;
   transition: background var(--transition), color var(--transition);
+}
+nav ul li a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s, left 0.3s;
+}
+nav ul li a:hover::after, nav ul li a.active::after {
+  width: 80%;
+  left: 10%;
 }
 nav ul li a:hover, nav ul li a.active {
   background: var(--accent);
@@ -73,9 +97,13 @@ nav ul li ul li a {
   padding: 0.5rem 1rem;
 }
 .theme-switcher {
+  box-shadow: 0 2px 8px rgba(79,140,255,0.10);
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  background: linear-gradient(90deg, var(--accent) 60%, #7fdfff 100%);
+  filter: drop-shadow(0 2px 8px rgba(79,140,255,0.10));
   margin-left: auto;
   cursor: pointer;
-  background: var(--accent);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -83,10 +111,14 @@ nav ul li ul li a {
   font-size: 1rem;
   transition: background var(--transition);
 }
+.theme-switcher:active {
+  transform: scale(0.96);
+}
 .theme-switcher:hover {
   background: #222;
 }
 .easter-egg {
+  animation: eggPop 0.5s cubic-bezier(.4,2,.6,1);
   display: none;
   position: fixed;
   bottom: 2rem;
@@ -99,17 +131,30 @@ nav ul li ul li a {
   font-size: 1.2rem;
   z-index: 9999;
 }
+@keyframes eggPop {
+  0% { transform: scale(0.7) rotate(-8deg); opacity: 0; }
+  80% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); }
+}
 .show-egg {
   display: block !important;
 }
 main {
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 8px 32px rgba(79,140,255,0.10);
+  animation: mainFadeIn 0.8s cubic-bezier(.4,2,.6,1) 1;
+  border: 1.5px solid rgba(79,140,255,0.10);
+  backdrop-filter: blur(4px) saturate(1.1);
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem;
-  background: rgba(255,255,255,0.7);
   border-radius: 12px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.06);
   transition: background var(--transition);
+}
+@keyframes mainFadeIn {
+  from { opacity: 0; transform: translateY(40px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 [data-theme="dark"] main {
   background: rgba(24,26,27,0.85);
@@ -122,4 +167,55 @@ main {
   main {
     padding: 1rem;
   }
+}
+.lang-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+.lang-options {
+  animation: fadeIn 0.3s, dropdownPop 0.4s cubic-bezier(.4,2,.6,1);
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 2.5rem;
+  background: var(--nav-bg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  border-radius: 8px;
+  min-width: 140px;
+  z-index: 20;
+  flex-direction: column;
+  padding: 0.3rem 0;
+}
+@keyframes dropdownPop {
+  0% { transform: scale(0.95) translateY(-10px); }
+  100% { transform: scale(1) translateY(0); }
+}
+.lang-options.show-lang {
+  display: flex;
+}
+.lang-options button {
+  background: none;
+  border: none;
+  color: var(--nav-text);
+  padding: 0.5rem 1rem;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+.lang-options button:hover {
+  background: var(--accent);
+  color: #fff;
+}
+.nav-actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 0.5rem;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }

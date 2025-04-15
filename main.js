@@ -11,11 +11,21 @@ const navHTML = `
         <li><a href="italent-hackathon.html">Hackathon</a></li>
         <li><a href="italent-seminaires.html">Seminaires</a></li>
         <li><a href="italent-pop-sessions.html">Pop Sessions</a></li>
-        <li><a href="italent-student-engagement.html">Student Engagement</a></li>
+        <li><a href="italent-student-engagement.html">Engagement</a></li>
       </ul>
     </li>
   </ul>
-  <button class="theme-switcher" id="themeBtn">🌗 Theme</button>
+  <div class="nav-actions">
+    <button class="theme-switcher" id="themeBtn">🌗 Theme</button>
+    <div class="lang-dropdown">
+      <button class="theme-switcher" id="langBtn">🌐 Language ▼</button>
+      <div class="lang-options" id="langOptions">
+        <button data-lang="en">English</button>
+        <button data-lang="nl">Nederlands</button>
+        <button data-lang="brainrot">Brainrot</button>
+      </div>
+    </div>
+  </div>
 `;
 
 // Inject navigation
@@ -50,7 +60,7 @@ const translations = {
   en: {
     nav: [
       'Home', 'About Me', 'Projects', 'iTalent',
-      'Internationalization', 'Hackathon', 'Seminaires', 'Pop Sessions', 'Student Engagement'
+      'Internationalization', 'Hackathon', 'Seminaires', 'Pop Sessions', 'Engagement'
     ],
     theme: '🌗 Theme',
     lang: '🌐 Language',
@@ -59,7 +69,7 @@ const translations = {
   nl: {
     nav: [
       'Home', 'Over Mij', 'Projecten', 'iTalent',
-      'Internationalisatie', 'Hackathon', 'Seminaries', 'Pop-sessies', 'Studentenbetrokkenheid'
+      'Internationalisatie', 'Hackathon', 'Seminaries', 'Pop-sessies', 'Betrokkenheid'
     ],
     theme: '🌗 Thema',
     lang: '🌐 Taal',
@@ -73,9 +83,18 @@ const translations = {
     theme: '🏴‍☠️ Arrr!',
     lang: '🏴‍☠️ Lingo',
     easter: '☠️ Avast! Ye found the secret booty! ☠️',
-  }
+  },
+  brainrot: {
+    nav: [
+      'H0m3', 'Wh0?', 'Pr0j3ctz', 'iTal3nt',
+      'G0bbl3dYg00k', 'H4ckz', 'S3m1n4rz', 'P0pZ', 'Eng4g3'
+    ],
+    theme: '🧠🦠',
+    lang: '🧬 Br41nr0t',
+    easter: '💀 Br41nR0t m0d3 4ct1v4t3d 💀',
+  },
 };
-const LANGS = ['en', 'nl', 'pirate'];
+const LANGS = ['en', 'nl', 'pirate', 'brainrot'];
 const getLang = () => localStorage.getItem('lang') || 'en';
 const setLang = lang => {
   localStorage.setItem('lang', lang);
@@ -102,8 +121,18 @@ function renderNav() {
         </ul>
       </li>
     </ul>
-    <button class="theme-switcher" id="themeBtn">${t.theme}</button>
-    <button class="theme-switcher" id="langBtn">${t.lang}</button>
+    <div class="nav-actions">
+      <button class="theme-switcher" id="themeBtn">${t.theme}</button>
+      <div class="lang-dropdown">
+        <button class="theme-switcher" id="langBtn">${t.lang} ▼</button>
+        <div class="lang-options" id="langOptions">
+          <button data-lang="en">English</button>
+          <button data-lang="nl">Nederlands</button>
+          <button data-lang="pirate">Pirate</button>
+          <button data-lang="brainrot">Brainrot</button>
+        </div>
+      </div>
+    </div>
   `;
   // Re-attach theme/lang events
   document.getElementById('themeBtn').onclick = () => {
@@ -111,10 +140,14 @@ function renderNav() {
     setTheme(newTheme);
   };
   document.getElementById('langBtn').onclick = () => {
-    const current = getLang();
-    const next = LANGS[(LANGS.indexOf(current) + 1) % LANGS.length];
-    setLang(next);
+    document.getElementById('langOptions').classList.toggle('show-lang');
   };
+  document.querySelectorAll('.lang-options button').forEach(btn => {
+    btn.onclick = e => {
+      setLang(btn.getAttribute('data-lang'));
+      document.getElementById('langOptions').classList.remove('show-lang');
+    };
+  });
   // Highlight active nav link
   const links = document.querySelectorAll('nav ul li a');
   links.forEach(link => {
@@ -149,7 +182,7 @@ window.addEventListener('keydown', e => {
   if (e.keyCode === code[pos]) {
     pos++;
     if (pos === code.length) {
-      setLang('pirate');
+      setLang('brainrot');
       egg.innerText = getEggText();
       egg.classList.add('show-egg');
       confetti();
