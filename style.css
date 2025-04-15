@@ -1,0 +1,125 @@
+/* Main theme variables */
+:root {
+  --primary-bg: #f5f6fa;
+  --primary-text: #222;
+  --accent: #4f8cff;
+  --nav-bg: #fff;
+  --nav-text: #222;
+  --transition: 0.3s;
+}
+[data-theme="dark"] {
+  --primary-bg: #181a1b;
+  --primary-text: #f5f6fa;
+  --accent: #ffb347;
+  --nav-bg: #23272f;
+  --nav-text: #f5f6fa;
+}
+body {
+  background: var(--primary-bg);
+  color: var(--primary-text);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  transition: background var(--transition), color var(--transition);
+}
+nav {
+  background: var(--nav-bg);
+  color: var(--nav-text);
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  position: relative;
+}
+nav ul li a {
+  color: var(--nav-text);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  transition: background var(--transition), color var(--transition);
+}
+nav ul li a:hover, nav ul li a.active {
+  background: var(--accent);
+  color: #fff;
+}
+nav ul li ul {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 2.2rem;
+  background: var(--nav-bg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-radius: 6px;
+  min-width: 180px;
+  flex-direction: column;
+  z-index: 10;
+}
+nav ul li:hover ul {
+  display: flex;
+}
+nav ul li ul li a {
+  padding: 0.5rem 1rem;
+}
+.theme-switcher {
+  margin-left: auto;
+  cursor: pointer;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  transition: background var(--transition);
+}
+.theme-switcher:hover {
+  background: #222;
+}
+.easter-egg {
+  display: none;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  font-size: 1.2rem;
+  z-index: 9999;
+}
+.show-egg {
+  display: block !important;
+}
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255,255,255,0.7);
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  transition: background var(--transition);
+}
+[data-theme="dark"] main {
+  background: rgba(24,26,27,0.85);
+}
+@media (max-width: 700px) {
+  nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  main {
+    padding: 1rem;
+  }
+}
