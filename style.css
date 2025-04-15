@@ -163,9 +163,22 @@ main {
   nav ul {
     flex-direction: column;
     gap: 0.5rem;
+    width: 100%;
+  }
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem 1rem;
+  }
+  .nav-actions {
+    width: 100%;
+    margin: 0.5rem 0 0 0;
+    justify-content: flex-start;
   }
   main {
     padding: 1rem;
+    margin: 1rem 0.5rem;
+    width: auto;
   }
 }
 .lang-dropdown {
@@ -218,4 +231,90 @@ main {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+.theme-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+.theme-options {
+  animation: fadeIn 0.3s, dropdownPop 0.4s cubic-bezier(.4,2,.6,1);
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 2.5rem;
+  background: var(--nav-bg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  border-radius: 8px;
+  min-width: 140px;
+  z-index: 20;
+  flex-direction: column;
+  padding: 0.3rem 0;
+}
+.theme-options.show-theme {
+  display: flex;
+}
+.theme-options button {
+  background: none;
+  border: none;
+  color: var(--nav-text);
+  padding: 0.5rem 1rem;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+.theme-options button:hover {
+  background: var(--accent);
+  color: #fff;
+}
+.palette-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.palette-picker {
+  background: var(--nav-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  padding: 1.5rem 2rem;
+  display: flex;
+  gap: 1rem;
+}
+.palette-btn {
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  background: none;
+  transition: border 0.2s, background 0.2s;
+}
+.palette-btn.selected, .palette-btn:hover {
+  background: var(--accent);
+  color: #fff !important;
+}
+.fun-fact {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%) scale(0.95);
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+  font-size: 1.1rem;
+  opacity: 0;
+  z-index: 9999;
+  transition: opacity 0.4s, transform 0.4s;
+}
+.show-fact {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
 }

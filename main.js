@@ -22,7 +22,8 @@ const navHTML = `
       <div class="lang-options" id="langOptions">
         <button data-lang="en">English</button>
         <button data-lang="nl">Nederlands</button>
-        <button data-lang="brainrot">Brainrot</button>
+        <button data-lang="pirate">Pirate</button>
+        <button data-lang="memespeak">MemeSpeak</button>
       </div>
     </div>
   </div>
@@ -33,19 +34,48 @@ const nav = document.getElementById('navbar');
 if (nav) nav.innerHTML = navHTML;
 
 // Theme switching
-const themeBtn = document.getElementById('themeBtn');
-const setTheme = theme => {
+const THEME_OPTIONS = [
+  { key: 'light', label: { en: 'Light', nl: 'Licht', memespeak: 'L1t', pirate: 'Sunlit' } },
+  { key: 'dark', label: { en: 'Dark', nl: 'Donker', memespeak: 'D4rk', pirate: 'Moonlit' } },
+  { key: 'palette', label: { en: 'Palette', nl: 'Palet', memespeak: 'C0l0rz', pirate: 'Rainbow' } },
+];
+
+const PALETTES = [
+  { name: 'Ocean', colors: { '--primary-bg': '#e0f7fa', '--primary-text': '#01579b', '--accent': '#00bcd4', '--nav-bg': '#b2ebf2', '--nav-text': '#01579b' } },
+  { name: 'Sunset', colors: { '--primary-bg': '#fff3e0', '--primary-text': '#bf360c', '--accent': '#ff7043', '--nav-bg': '#ffe0b2', '--nav-text': '#bf360c' } },
+  { name: 'Forest', colors: { '--primary-bg': '#e8f5e9', '--primary-text': '#1b5e20', '--accent': '#43a047', '--nav-bg': '#c8e6c9', '--nav-text': '#1b5e20' } },
+];
+
+function renderThemeDropdown() {
+  const lang = getLang();
+  let theme = getTheme();
+  let html = `<div class="theme-dropdown"><button class="theme-switcher" id="themeBtn">${translations[lang].theme} ▼</button><div class="theme-options" id="themeOptions">`;
+  THEME_OPTIONS.forEach(opt => {
+    html += `<button data-theme="${opt.key}">${opt.label[lang] || opt.label['en']}</button>`;
+  });
+  html += `</div></div>`;
+  return html;
+}
+
+function setTheme(theme, paletteIdx) {
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('theme', theme);
-};
-const getTheme = () => localStorage.getItem('theme') || 'light';
-setTheme(getTheme());
-if (themeBtn) {
-  themeBtn.onclick = () => {
-    const newTheme = getTheme() === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-  };
+  if (theme === 'palette') {
+    const idx = paletteIdx !== undefined ? paletteIdx : getPaletteIdx();
+    Object.entries(PALETTES[idx].colors).forEach(([k, v]) => {
+      document.documentElement.style.setProperty(k, v);
+    });
+    localStorage.setItem('paletteIdx', idx);
+  } else {
+    // Reset palette
+    Object.keys(PALETTES[0].colors).forEach(k => document.documentElement.style.removeProperty(k));
+    localStorage.removeItem('paletteIdx');
+  }
 }
+function getTheme() { return localStorage.getItem('theme') || 'light'; }
+function getPaletteIdx() { return parseInt(localStorage.getItem('paletteIdx') || '0', 10); }
+
+setTheme(getTheme());
 
 // Highlight active nav link
 const links = document.querySelectorAll('nav ul li a');
@@ -65,6 +95,9 @@ const translations = {
     theme: '🌗 Theme',
     lang: '🌐 Language',
     easter: '🎉 You found the easter egg! 🎉',
+    about_title: 'About Me',
+    about_p1: 'I’m an enthusiastic IT student who enjoys learning by doing. I’ve worked on various projects involving cloud, automation, and security, and I like finding practical solutions to technical challenges. I’m active in the student council and enjoy being involved in projects that make a difference.',
+    about_p2: 'Outside of school, I like going to the gym, traveling, going out with friends, and discovering new things. I’m always open to new experiences and love working with others to build creative ideas.',
   },
   nl: {
     nav: [
@@ -74,6 +107,9 @@ const translations = {
     theme: '🌗 Thema',
     lang: '🌐 Taal',
     easter: '🎉 Je hebt het paasei gevonden! 🎉',
+    about_title: 'Over Mij',
+    about_p1: 'Ik ben een enthousiaste IT-student die graag leert door te doen. Ik heb aan verschillende projecten gewerkt rond cloud, automatisering en security, en vind het leuk om praktische oplossingen te zoeken voor technische uitdagingen. Ik ben actief in de studentenraad en werk graag mee aan projecten die het verschil maken.',
+    about_p2: 'Buiten school ga ik graag naar de fitness, reis ik, ga ik uit met vrienden en ontdek ik nieuwe dingen. Ik sta altijd open voor nieuwe ervaringen en werk graag samen aan creatieve ideeën.',
   },
   pirate: {
     nav: [
@@ -83,18 +119,24 @@ const translations = {
     theme: '🏴‍☠️ Arrr!',
     lang: '🏴‍☠️ Lingo',
     easter: '☠️ Avast! Ye found the secret booty! ☠️',
+    about_title: 'Cap’n Bio',
+    about_p1: 'Arrr! This be a hearty IT buccaneer, learnin’ by doin’! Sailed many a project on the cloud, automation, and security seas. Loves findin’ clever fixes for techy troubles. Sits on the crew council and helps chart new courses.',
+    about_p2: 'When not at sea, enjoys the gym, explorin’ new lands, revelin’ with mates, and seekin’ new adventures. Always ready for a new voyage and creatin’ grand ideas with the crew!',
   },
-  brainrot: {
+  memespeak: {
     nav: [
       'H0m3', 'Wh0?', 'Pr0j3ctz', 'iTal3nt',
       'G0bbl3dYg00k', 'H4ckz', 'S3m1n4rz', 'P0pZ', 'Eng4g3'
     ],
     theme: '🧠🦠',
-    lang: '🧬 Br41nr0t',
-    easter: '💀 Br41nR0t m0d3 4ct1v4t3d 💀',
+    lang: '🧬 M3m3Sp34k',
+    easter: '💀 M3m3Sp34k m0d3 4ct1v4t3d 💀',
+    about_title: 'Wh0?',
+    about_p1: '1T n3rd, l0v3z d0in stuf. D1d cl0ud, aut0, s3c, fixin’ pr0bl3mz. StUd3nt c0uncil, mak3z d1ff.',
+    about_p2: 'Gym, tr4v3l, fri3ndz, n3w stuf. Alw4ys up 4 xp, b1g br41nst0rmz w/ t3am.',
   },
 };
-const LANGS = ['en', 'nl', 'pirate', 'brainrot'];
+const LANGS = ['en', 'nl', 'pirate', 'memespeak'];
 const getLang = () => localStorage.getItem('lang') || 'en';
 const setLang = lang => {
   localStorage.setItem('lang', lang);
@@ -122,23 +164,31 @@ function renderNav() {
       </li>
     </ul>
     <div class="nav-actions">
-      <button class="theme-switcher" id="themeBtn">${t.theme}</button>
+      ${renderThemeDropdown()}
       <div class="lang-dropdown">
         <button class="theme-switcher" id="langBtn">${t.lang} ▼</button>
         <div class="lang-options" id="langOptions">
           <button data-lang="en">English</button>
           <button data-lang="nl">Nederlands</button>
           <button data-lang="pirate">Pirate</button>
-          <button data-lang="brainrot">Brainrot</button>
+          <button data-lang="memespeak">MemeSpeak</button>
         </div>
       </div>
     </div>
   `;
-  // Re-attach theme/lang events
+  // Theme dropdown events
   document.getElementById('themeBtn').onclick = () => {
-    const newTheme = getTheme() === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
+    document.getElementById('themeOptions').classList.toggle('show-theme');
   };
+  document.querySelectorAll('.theme-options button').forEach((btn, i) => {
+    btn.onclick = e => {
+      const theme = btn.getAttribute('data-theme');
+      setTheme(theme);
+      if (theme === 'palette') showPalettePicker();
+      document.getElementById('themeOptions').classList.remove('show-theme');
+    };
+  });
+  // Re-attach lang events
   document.getElementById('langBtn').onclick = () => {
     document.getElementById('langOptions').classList.toggle('show-lang');
   };
@@ -155,6 +205,26 @@ function renderNav() {
       link.classList.add('active');
     }
   });
+}
+
+function showPalettePicker() {
+  let idx = getPaletteIdx();
+  let html = '<div class="palette-picker">';
+  PALETTES.forEach((p, i) => {
+    html += `<button class="palette-btn${i===idx?' selected':''}" data-idx="${i}" style="background:${p.colors['--accent']};color:${p.colors['--primary-text']}">${p.name}</button>`;
+  });
+  html += '</div>';
+  const picker = document.createElement('div');
+  picker.innerHTML = html;
+  picker.className = 'palette-modal';
+  document.body.appendChild(picker);
+  picker.querySelectorAll('.palette-btn').forEach(btn => {
+    btn.onclick = () => {
+      setTheme('palette', parseInt(btn.getAttribute('data-idx')));
+      document.body.removeChild(picker);
+    };
+  });
+  picker.onclick = e => { if (e.target === picker) document.body.removeChild(picker); };
 }
 
 function translatePage() {
@@ -182,7 +252,7 @@ window.addEventListener('keydown', e => {
   if (e.keyCode === code[pos]) {
     pos++;
     if (pos === code.length) {
-      setLang('brainrot');
+      setLang('memespeak');
       egg.innerText = getEggText();
       egg.classList.add('show-egg');
       confetti();
@@ -212,3 +282,19 @@ function confetti() {
     setTimeout(()=>c.remove(), 2600);
   }
 }
+
+// Daily fun fact
+async function showFunFact() {
+  try {
+    const res = await fetch('funfacts.json');
+    const facts = await res.json();
+    const idx = (new Date().getDate() + new Date().getMonth()) % facts.length;
+    let fact = facts[idx];
+    let factBox = document.createElement('div');
+    factBox.className = 'fun-fact';
+    factBox.innerHTML = `<b>💡 Fun Fact:</b> ${fact}`;
+    document.body.appendChild(factBox);
+    setTimeout(()=>factBox.classList.add('show-fact'), 100);
+  } catch {}
+}
+showFunFact();
