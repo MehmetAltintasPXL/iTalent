@@ -3,10 +3,10 @@ const navHTML = `
   <ul>
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About Me</a></li>
-    <li><a href="projects.html">Projects</a></li>
+    <li><a href="experiences.html">Experiences</a></li>
     <li>
-      <a href="italent.html">iTalent ▾</a>
-      <ul>
+      <a href="italent.html" id="italentNavBtn">iTalent ▾</a>
+      <ul class="italent-dropdown">
         <li><a href="italent-internationalization.html">Internationalization</a></li>
         <li><a href="italent-hackathon.html">Hackathon</a></li>
         <li><a href="italent-seminaires.html">Seminaires</a></li>
@@ -44,6 +44,10 @@ const PALETTES = [
   { name: 'Ocean', colors: { '--primary-bg': '#e0f7fa', '--primary-text': '#01579b', '--accent': '#00bcd4', '--nav-bg': '#b2ebf2', '--nav-text': '#01579b' } },
   { name: 'Sunset', colors: { '--primary-bg': '#fff3e0', '--primary-text': '#bf360c', '--accent': '#ff7043', '--nav-bg': '#ffe0b2', '--nav-text': '#bf360c' } },
   { name: 'Forest', colors: { '--primary-bg': '#e8f5e9', '--primary-text': '#1b5e20', '--accent': '#43a047', '--nav-bg': '#c8e6c9', '--nav-text': '#1b5e20' } },
+  { name: 'Candy', colors: { '--primary-bg': '#ffe6fa', '--primary-text': '#d72660', '--accent': '#f46036', '--nav-bg': '#f7b2ad', '--nav-text': '#d72660' } },
+  { name: 'Cyber', colors: { '--primary-bg': '#0f2027', '--primary-text': '#f5f7fa', '--accent': '#2c5364', '--nav-bg': '#203a43', '--nav-text': '#f5f7fa' } },
+  { name: 'Lime', colors: { '--primary-bg': '#f4ff81', '--primary-text': '#33691e', '--accent': '#aeea00', '--nav-bg': '#d4e157', '--nav-text': '#33691e' } },
+  { name: 'Bubblegum', colors: { '--primary-bg': '#ffb6b9', '--primary-text': '#6a0572', '--accent': '#f67280', '--nav-bg': '#c06c84', '--nav-text': '#6a0572' } },
 ];
 
 function renderThemeDropdown() {
@@ -89,7 +93,7 @@ links.forEach(link => {
 const translations = {
   en: {
     nav: [
-      'Home', 'About Me', 'Projects', 'iTalent',
+      'Home', 'About Me', 'Experiences', 'iTalent',
       'Internationalization', 'Hackathon', 'Seminaires', 'Pop Sessions', 'Engagement'
     ],
     theme: '🌗 Theme',
@@ -101,7 +105,7 @@ const translations = {
   },
   nl: {
     nav: [
-      'Home', 'Over Mij', 'Projecten', 'iTalent',
+      'Home', 'Over Mij', 'Ervaringen', 'iTalent',
       'Internationalisatie', 'Hackathon', 'Seminaries', 'Pop-sessies', 'Betrokkenheid'
     ],
     theme: '🌗 Thema',
@@ -151,10 +155,10 @@ function renderNav() {
     <ul>
       <li><a href="index.html">${t.nav[0]}</a></li>
       <li><a href="about.html">${t.nav[1]}</a></li>
-      <li><a href="projects.html">${t.nav[2]}</a></li>
+      <li><a href="experiences.html">${t.nav[2]}</a></li>
       <li>
-        <a href="italent.html">${t.nav[3]} ▾</a>
-        <ul>
+        <a href="italent.html" id="italentNavBtn">${t.nav[3]} ▾</a>
+        <ul class="italent-dropdown">
           <li><a href="italent-internationalization.html">${t.nav[4]}</a></li>
           <li><a href="italent-hackathon.html">${t.nav[5]}</a></li>
           <li><a href="italent-seminaires.html">${t.nav[6]}</a></li>
@@ -283,12 +287,12 @@ function confetti() {
   }
 }
 
-// Daily fun fact
+// Fun fact: show a new random fun fact every page load
 async function showFunFact() {
   try {
     const res = await fetch('funfacts.json');
     const facts = await res.json();
-    const idx = (new Date().getDate() + new Date().getMonth()) % facts.length;
+    const idx = Math.floor(Math.random() * facts.length);
     let fact = facts[idx];
     let factBox = document.createElement('div');
     factBox.className = 'fun-fact';

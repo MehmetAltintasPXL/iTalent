@@ -17,9 +17,9 @@
 body {
   background: var(--primary-bg);
   color: var(--primary-text);
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: 'Segoe UI', 'Comic Sans MS', 'Arial', sans-serif;
   margin: 0;
-  transition: background var(--transition), color var(--transition);
+  transition: background 0.5s, color 0.5s;
 }
 nav {
   backdrop-filter: blur(8px) saturate(1.2);
@@ -77,6 +77,11 @@ nav ul li a:hover::after, nav ul li a.active::after {
 nav ul li a:hover, nav ul li a.active {
   background: var(--accent);
   color: #fff;
+}
+nav ul li a.active {
+  font-weight: bold;
+  color: var(--accent, #00bcd4);
+  text-shadow: 0 2px 8px rgba(0,188,212,0.13);
 }
 nav ul li ul {
   display: none;
@@ -272,32 +277,32 @@ main {
 .palette-modal {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.18);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 10000;
 }
 .palette-picker {
-  background: var(--nav-bg);
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
-  padding: 1.5rem 2rem;
+  background: #fff;
+  border-radius: 18px;
+  padding: 2em 2.5em;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
   display: flex;
-  gap: 1rem;
+  gap: 1em;
 }
 .palette-btn {
-  border: 2px solid var(--accent);
+  border: none;
   border-radius: 8px;
-  padding: 0.7rem 1.2rem;
-  font-size: 1.1rem;
+  padding: 0.7em 1.2em;
+  font-size: 1em;
   cursor: pointer;
-  background: none;
-  transition: border 0.2s, background 0.2s;
+  margin: 0 0.2em;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 .palette-btn.selected, .palette-btn:hover {
-  background: var(--accent);
-  color: #fff !important;
+  transform: scale(1.12);
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.13);
 }
 .fun-fact {
   position: fixed;
@@ -317,4 +322,108 @@ main {
 .show-fact {
   opacity: 1;
   transform: translateX(-50%) scale(1);
+}
+.fun-fact {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  background: var(--accent, #00bcd4);
+  color: #fff;
+  padding: 1em 1.5em;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  transition: opacity 0.5s, transform 0.5s;
+  font-size: 1.1em;
+  z-index: 9999;
+}
+.fun-fact.show-fact {
+  opacity: 1;
+  transform: translateY(0) scale(1.05);
+}
+.experiences-list {
+  list-style: none;
+  padding: 0;
+  margin: 2em 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+.experiences-list li {
+  background: var(--nav-bg, #f0f0f0);
+  border-radius: 14px;
+  padding: 1.2em 1.5em;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.07);
+  font-size: 1.15em;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.experiences-list li:hover {
+  transform: scale(1.03) rotate(-1deg);
+  box-shadow: 0 6px 24px 0 rgba(0,0,0,0.13);
+  background: var(--accent, #e0f7fa);
+  color: var(--primary-text, #01579b);
+}
+.experiences-list .emoji {
+  font-size: 1.5em;
+  margin-left: 0.5em;
+}
+.italent-dropdown {
+  min-width: 260px;
+  font-size: 1.1em;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  background: var(--nav-bg, #f0f0f0);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.10);
+  z-index: 100;
+}
+.italent-dropdown li {
+  margin: 0.5em 0;
+}
+.italent-dropdown a {
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.italent-dropdown a:hover {
+  background: var(--accent, #e0f7fa);
+  color: var(--primary-text, #01579b);
+  font-weight: bold;
+}
+.italent-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  margin: 2em 0 0 0;
+  justify-content: center;
+}
+.italent-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, var(--accent, #00bcd4) 60%, #fff 100%);
+  color: var(--primary-text, #01579b);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.10);
+  padding: 2em 2.5em;
+  min-width: 180px;
+  min-height: 120px;
+  font-size: 1.15em;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.italent-card .emoji {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+.italent-card:hover {
+  transform: scale(1.07) rotate(1deg);
+  background: linear-gradient(135deg, #fff 40%, var(--accent, #00bcd4) 100%);
+  color: var(--accent, #00bcd4);
+  box-shadow: 0 8px 32px 0 rgba(0,188,212,0.18);
 }
