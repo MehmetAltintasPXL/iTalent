@@ -75,8 +75,21 @@ function setupDropdowns() {
   document.querySelectorAll('.italent-dropdown').forEach(drop => {
     const parent = drop.parentElement;
     if (parent) {
-      parent.onmouseenter = () => drop.style.display = 'flex';
-      parent.onmouseleave = () => drop.style.display = 'none';
+      let dropdownTimeout;
+      parent.onmouseenter = () => {
+        clearTimeout(dropdownTimeout);
+        drop.style.display = 'flex';
+      };
+      parent.onmouseleave = () => {
+        dropdownTimeout = setTimeout(() => drop.style.display = 'none', 200);
+      };
+      drop.onmouseenter = () => {
+        clearTimeout(dropdownTimeout);
+        drop.style.display = 'flex';
+      };
+      drop.onmouseleave = () => {
+        dropdownTimeout = setTimeout(() => drop.style.display = 'none', 200);
+      };
     }
   });
   // Close dropdowns on outside click
@@ -101,18 +114,37 @@ function setupDropdowns() {
 
 // --- Text Color Adaptation ---
 function adaptTextColor() {
-  const theme = getTheme();
-  const isDark = theme === 'dark' || (theme === 'palette' && getComputedStyle(document.documentElement).getPropertyValue('--primary-bg').trim().startsWith('#0f'));
+  // Improved contrast logic
+  const getContrastYIQ = hex => {
+    hex = hex.replace('#', '');
+    if (hex.length === 3) hex = hex.split('').map(x=>x+x).join('');
+    const r = parseInt(hex.substr(0,2),16), g = parseInt(hex.substr(2,2),16), b = parseInt(hex.substr(4,2),16);
+    return ((r*299)+(g*587)+(b*114))/1000 >= 140 ? '#222' : '#fff';
+  };
+  let bg = getComputedStyle(document.documentElement).getPropertyValue('--primary-bg').trim();
+  let navBg = getComputedStyle(document.documentElement).getPropertyValue('--nav-bg').trim();
+  let accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+  let navText = getContrastYIQ(navBg.replace('rgba','').replace('(','').replace(')','').split(',')[0].length>3?navBg:'#fff');
+  let mainText = getContrastYIQ(bg.replace('rgba','').replace('(','').replace(')','').split(',')[0].length>3?bg:'#fff');
+  // Nav
   const navEl = document.querySelector('nav');
-  if (navEl) navEl.style.color = isDark ? '#fff' : '#222';
+  if (navEl) navEl.style.color = navText;
   document.querySelectorAll('nav a, nav ul li a, .nav-actions, .theme-switcher, .lang-options button, .theme-options button').forEach(el => {
-    el.style.color = isDark ? '#fff' : '#222';
+    el.style.color = navText;
     el.style.background = 'none';
   });
   document.querySelectorAll('.italent-dropdown, .lang-options, .theme-options').forEach(drop => {
-    drop.style.background = isDark ? 'rgba(30,34,90,0.97)' : '#fff';
-    drop.style.color = isDark ? '#fff' : '#222';
+    drop.style.background = navBg;
+    drop.style.color = navText;
     drop.style.boxShadow = '0 4px 24px rgba(0,0,0,0.13)';
+  });
+  // Main
+  const main = document.querySelector('main');
+  if (main) main.style.color = mainText;
+  // Fun fact and easter egg
+  document.querySelectorAll('.fun-fact, .easter-egg').forEach(box => {
+    box.style.color = getContrastYIQ(accent);
+    box.style.background = accent;
   });
 }
 
@@ -326,7 +358,21 @@ function translatePage() {
   // Translate elements with data-i18n
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (translations[lang][key]) el.innerHTML = translations[lang][key];
+    if (translations[lang][key]) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+  // Translate list items and article content with data-i18n-list
+  document.querySelectorAll('[data-i18n-list]').forEach(el => {
+    const key = el.getAttribute('data-i18n-list');
+    if (translations[lang][key] && Array.isArray(translations[lang][key])) {
+      el.innerHTML = '';
+      translations[lang][key].forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = item;
+        el.appendChild(li);
+      });
+    }
   });
 }
 
