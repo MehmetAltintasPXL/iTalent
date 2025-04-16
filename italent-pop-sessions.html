@@ -1,3 +1,5 @@
+<!-- 👀 Sneaky dev! Looking under the hood, are we? -->
+<!-- 🧠 My brain is 90% coffee and 10% semicolons -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,14 +11,40 @@
 <body>
   <nav id="navbar"></nav>
   <main>
-    <h1>Pop Sessions</h1>
+    <h1 data-i18n="pop_sessions_title">Pop Sessions</h1>
     <ul>
-      <li><strong data-i18n="pop_projectweek_title">Projectweek 2TIN</strong><br data-i18n="pop_projectweek_desc">Seminaries en workshops gericht op reflectie, samenwerking en voorbereiding op het Research Project.</li>
-      <li><a href="pop-poping.html"><strong data-i18n="pop_poping_title">POP-sessie 2TIN: POPing</strong></a><br data-i18n="pop_poping_desc">Sessie over communicatie en feedback in teamwerk, met interactieve oefeningen.</li>
-      <li><a href="pop-brein-aan-het-werk.html"><strong data-i18n="pop_brain_title">POP-sessie 2TIN: Brein aan het werk! Niet storen!</strong></a><br data-i18n="pop_brain_desc">Sessie over de invloed van technologie op gedrag, concentratie en productiviteit.</li>
-      <li><a href="pop-my-team-and-i.html"><strong data-i18n="pop_team_title">POP-sessie 3TIN: My team and I</strong></a><br data-i18n="pop_team_desc">Sessie over communicatie en feedback in groepswerk, met praktijkgerichte oefeningen.</li>
+      <li><a href="pop-poping.html"><strong data-i18n="pop_poping_title">POP-sessie 2TIN: POPing</strong></a><br data-i18n="pop_poping_desc"><span data-i18n="pop_poping_desc">Sessie over communicatie en feedback in teamwerk, met interactieve oefeningen.</span></li>
+      <li><a href="pop-brein-aan-het-werk.html"><strong data-i18n="pop_brain_title">POP-sessie 2TIN: Brein aan het werk! Niet storen!</strong></a><br data-i18n="pop_brain_desc"><span data-i18n="pop_brain_desc">Sessie over de invloed van technologie op gedrag, concentratie en productiviteit.</span></li>
+      <li><a href="pop-my-team-and-i.html"><strong data-i18n="pop_team_title">POP-sessie 3TIN: My team and I</strong></a><br data-i18n="pop_team_desc"><span data-i18n="pop_team_desc">Sessie over communicatie en feedback in groepswerk, met praktijkgerichte oefeningen.</span></li>
     </ul>
   </main>
   <script src="main.js"></script>
+  <script>
+    (function(){
+      const code = [38,38,40,40,37,39,37,39,66,65];
+      let pos = 0;
+      window.addEventListener('keydown', e => {
+        if (e.keyCode === code[pos]) {
+          pos++;
+          if (pos === code.length) {
+            if (!document.getElementById('dancing-cat')) {
+              const cat = document.createElement('div');
+              cat.id = 'dancing-cat';
+              cat.style.position = 'fixed';
+              cat.style.bottom = '2em';
+              cat.style.right = '2em';
+              cat.style.zIndex = 99999;
+              cat.innerHTML = '<img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" style="width:120px;">';
+              document.body.appendChild(cat);
+              setTimeout(()=>cat.remove(), 7000);
+            }
+            pos = 0;
+          }
+        } else {
+          pos = 0;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -16,22 +16,47 @@
     <section class="project-gallery">
       <h2 data-i18n="gallery_title">Project Gallery</h2>
       <div class="gallery-grid">
-        <div class="gallery-card">
-          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80" alt="Cloud Project" />
-          <div class="caption" data-i18n="gallery_cloud">Cloud Automation Demo</div>
+        <div class="gallery-card flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80" alt="Cloud Project" />
+              <div class="caption" data-i18n="gallery_cloud">Cloud Automation Demo</div>
+            </div>
+            <div class="flip-card-back">
+              <div class="caption">Automated cloud deployment using CI/CD pipelines and infrastructure as code. 🚀</div>
+            </div>
+          </div>
         </div>
-        <div class="gallery-card">
-          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Teamwork" />
-          <div class="caption" data-i18n="gallery_team">Team Collaboration</div>
+        <div class="gallery-card flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Teamwork" />
+              <div class="caption" data-i18n="gallery_team">Team Collaboration</div>
+            </div>
+            <div class="flip-card-back">
+              <div class="caption">Worked in a diverse team, using agile methods to deliver results. 🤝</div>
+            </div>
+          </div>
         </div>
-        <div class="gallery-card">
-          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Support" />
-          <div class="caption" data-i18n="gallery_support">Support in Action</div>
+        <div class="gallery-card flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Support" />
+              <div class="caption" data-i18n="gallery_support">Support in Action</div>
+            </div>
+            <div class="flip-card-back">
+              <div class="caption">Provided hands-on support and troubleshooting for real users. 🛠️</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+    <section class="funfact-carousel-section">
+      <div id="funfact-carousel" class="funfact-carousel"></div>
+    </section>
     <section class="quote-section">
       <blockquote data-i18n="quote">“The best way to predict the future is to invent it.” – Alan Kay</blockquote>
+      <button id="random-quote-btn" style="margin-top:1em;">🎲 Random Quote</button>
     </section>
   </main>
   <script src="main.js"></script>
@@ -85,6 +110,70 @@
   display: inline-block;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
+/* --- FLIP CARD STYLES --- */
+.flip-card {
+  background: transparent;
+  width: 220px;
+  height: 220px;
+  perspective: 1000px;
+  margin-bottom: 1em;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(.4,2,.6,1);
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner, .flip-card:focus-within .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.flip-card-front {
+  background: #fff;
+  z-index: 2;
+}
+.flip-card-back {
+  background: linear-gradient(135deg, var(--accent, #4f8cff) 60%, #fff 100%);
+  color: var(--primary-text, #01579b);
+  transform: rotateY(180deg);
+  z-index: 3;
+  padding: 1.5em 1em;
+  font-size: 1.1em;
+  text-align: center;
+}
+/* --- FUN FACT CAROUSEL --- */
+.funfact-carousel-section {
+  margin: 2.5em 0 0 0;
+  text-align: center;
+}
+.funfact-carousel {
+  display: inline-block;
+  background: var(--accent, #4f8cff);
+  color: #fff;
+  padding: 1em 2em;
+  border-radius: 14px;
+  font-size: 1.1em;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  min-width: 280px;
+  min-height: 2.5em;
+  transition: opacity 0.5s;
+  opacity: 0;
+}
+.funfact-carousel.show {
+  opacity: 1;
+}
 </style>
 <script>
 // Add translation keys for experiences page
@@ -118,6 +207,51 @@ if (window.translations) {
     ]
   });
 }
+// --- FLIP CARD & FUN FACT CAROUSEL & RANDOM QUOTE ---
+document.addEventListener('DOMContentLoaded', function() {
+  // Fun Fact Carousel
+  fetch('funfacts.json').then(r=>r.json()).then(facts => {
+    let idx = 0;
+    const el = document.getElementById('funfact-carousel');
+    function showFact(i) {
+      el.classList.remove('show');
+      setTimeout(()=>{
+        el.innerHTML = `<b>💡 Fun Fact:</b> ${facts[i]}`;
+        el.classList.add('show');
+      }, 300);
+    }
+    showFact(idx);
+    setInterval(()=>{
+      idx = (idx+1)%facts.length;
+      showFact(idx);
+    }, 5000);
+  });
+
+  // Random Quote Button
+  const quotes = [
+    '“The best way to predict the future is to invent it.” – Alan Kay',
+    '“Code is like humor. When you have to explain it, it’s bad.” – Cory House',
+    '“Simplicity is the soul of efficiency.” – Austin Freeman',
+    '“Programs must be written for people to read, and only incidentally for machines to execute.” – Harold Abelson',
+    '“First, solve the problem. Then, write the code.” – John Johnson',
+    '“Experience is the name everyone gives to their mistakes.” – Oscar Wilde',
+    '“Java is to JavaScript what car is to Carpet.” – Chris Heilmann',
+    '“Talk is cheap. Show me the code.” – Linus Torvalds'
+  ];
+  const quoteBlock = document.querySelector('.quote-section blockquote');
+  const btn = document.getElementById('random-quote-btn');
+  if (btn && quoteBlock) {
+    btn.addEventListener('click', () => {
+      let q;
+      do { q = quotes[Math.floor(Math.random()*quotes.length)]; } while(q === quoteBlock.innerText);
+      quoteBlock.style.opacity = 0;
+      setTimeout(()=>{
+        quoteBlock.innerText = q;
+        quoteBlock.style.opacity = 1;
+      }, 350);
+    });
+  }
+});
 </script>
 </body>
 </html>
