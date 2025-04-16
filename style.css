@@ -14,6 +14,55 @@
   --nav-bg: #23272f;
   --nav-text: #f5f6fa;
 }
+[data-theme="ocean"] {
+  --primary-bg: #e0f7fa;
+  --primary-text: #01579b;
+  --accent: #00bcd4;
+  --nav-bg: #b2ebf2;
+  --nav-text: #01579b;
+}
+[data-theme="sunset"] {
+  --primary-bg: #fff3e0;
+  --primary-text: #bf360c;
+  --accent: #ff7043;
+  --nav-bg: #ffe0b2;
+  --nav-text: #bf360c;
+}
+[data-theme="forest"] {
+  --primary-bg: #e8f5e9;
+  --primary-text: #1b5e20;
+  --accent: #43a047;
+  --nav-bg: #c8e6c9;
+  --nav-text: #1b5e20;
+}
+[data-theme="candy"] {
+  --primary-bg: #ffe6fa;
+  --primary-text: #d72660;
+  --accent: #f46036;
+  --nav-bg: #f7b2ad;
+  --nav-text: #d72660;
+}
+[data-theme="cyber"] {
+  --primary-bg: #0f2027;
+  --primary-text: #f5f7fa;
+  --accent: #2c5364;
+  --nav-bg: #203a43;
+  --nav-text: #f5f7fa;
+}
+[data-theme="lime"] {
+  --primary-bg: #f4ff81;
+  --primary-text: #33691e;
+  --accent: #aeea00;
+  --nav-bg: #d4e157;
+  --nav-text: #33691e;
+}
+[data-theme="bubblegum"] {
+  --primary-bg: #ffb6b9;
+  --primary-text: #6a0572;
+  --accent: #f67280;
+  --nav-bg: #c06c84;
+  --nav-text: #6a0572;
+}
 body {
   background: var(--primary-bg);
   color: var(--primary-text);
