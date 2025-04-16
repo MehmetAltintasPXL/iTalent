@@ -33,6 +33,96 @@ const navHTML = `
 const nav = document.getElementById('navbar');
 if (nav) nav.innerHTML = navHTML;
 
+// --- Layout & Style Enhancements ---
+function applyBeautifulLayout() {
+  // Add glassmorphism and shadow to nav
+  const navEl = document.querySelector('nav');
+  if (navEl) {
+    navEl.style.backdropFilter = 'blur(16px) saturate(1.5)';
+    navEl.style.background = 'rgba(30, 34, 90, 0.85)';
+    navEl.style.boxShadow = '0 8px 32px 0 rgba(31, 38, 135, 0.18)';
+    navEl.style.borderRadius = '18px';
+    navEl.style.margin = '1.5rem auto 1rem auto';
+    navEl.style.maxWidth = '1100px';
+    navEl.style.padding = '0.7rem 2.5rem';
+    navEl.style.transition = 'background 0.5s, color 0.5s';
+  }
+  // Main content
+  const main = document.querySelector('main');
+  if (main) {
+    main.style.background = 'rgba(255,255,255,0.92)';
+    main.style.boxShadow = '0 8px 32px 0 rgba(31, 38, 135, 0.13)';
+    main.style.borderRadius = '22px';
+    main.style.maxWidth = '900px';
+    main.style.margin = '2.5rem auto';
+    main.style.padding = '2.5rem 2.5rem 2rem 2.5rem';
+    main.style.transition = 'background 0.5s, color 0.5s';
+  }
+  // Fun fact box
+  document.querySelectorAll('.fun-fact').forEach(factBox => {
+    factBox.style.background = 'linear-gradient(90deg, #4f8cff 60%, #7fdfff 100%)';
+    factBox.style.color = '#fff';
+    factBox.style.boxShadow = '0 4px 24px rgba(0,0,0,0.13)';
+    factBox.style.borderRadius = '14px';
+    factBox.style.fontWeight = '600';
+    factBox.style.fontSize = '1.15rem';
+  });
+}
+
+// --- Dropdown Fixes ---
+function setupDropdowns() {
+  // iTalent dropdown
+  document.querySelectorAll('.italent-dropdown').forEach(drop => {
+    const parent = drop.parentElement;
+    if (parent) {
+      parent.onmouseenter = () => drop.style.display = 'flex';
+      parent.onmouseleave = () => drop.style.display = 'none';
+    }
+  });
+  // Close dropdowns on outside click
+  document.addEventListener('click', e => {
+    document.querySelectorAll('.italent-dropdown').forEach(drop => {
+      if (!drop.contains(e.target) && !drop.parentElement.contains(e.target)) {
+        drop.style.display = 'none';
+      }
+    });
+    document.querySelectorAll('.lang-options').forEach(drop => {
+      if (!drop.contains(e.target) && !drop.parentElement.contains(e.target)) {
+        drop.classList.remove('show-lang');
+      }
+    });
+    document.querySelectorAll('.theme-options').forEach(drop => {
+      if (!drop.contains(e.target) && !drop.parentElement.contains(e.target)) {
+        drop.classList.remove('show-theme');
+      }
+    });
+  });
+}
+
+// --- Text Color Adaptation ---
+function adaptTextColor() {
+  const theme = getTheme();
+  const isDark = theme === 'dark' || (theme === 'palette' && getComputedStyle(document.documentElement).getPropertyValue('--primary-bg').trim().startsWith('#0f'));
+  const navEl = document.querySelector('nav');
+  if (navEl) navEl.style.color = isDark ? '#fff' : '#222';
+  document.querySelectorAll('nav a, nav ul li a, .nav-actions, .theme-switcher, .lang-options button, .theme-options button').forEach(el => {
+    el.style.color = isDark ? '#fff' : '#222';
+    el.style.background = 'none';
+  });
+  document.querySelectorAll('.italent-dropdown, .lang-options, .theme-options').forEach(drop => {
+    drop.style.background = isDark ? 'rgba(30,34,90,0.97)' : '#fff';
+    drop.style.color = isDark ? '#fff' : '#222';
+    drop.style.boxShadow = '0 4px 24px rgba(0,0,0,0.13)';
+  });
+}
+
+// --- Translation Fixes ---
+function translateAll() {
+  translatePage();
+  // Also translate nav after render
+  setTimeout(() => translatePage(), 100);
+}
+
 // Theme switching
 const THEME_OPTIONS = [
   { key: 'light', label: { en: 'Light', nl: 'Licht', memespeak: 'L1t', pirate: 'Sunlit' } },
@@ -242,7 +332,30 @@ function translatePage() {
 
 // Initial render
 renderNav();
-translatePage();
+translateAll();
+setupDropdowns();
+adaptTextColor();
+applyBeautifulLayout();
+
+// Re-apply on theme/lang change
+window.addEventListener('storage', () => {
+  adaptTextColor();
+  applyBeautifulLayout();
+  translateAll();
+});
+
+const origSetTheme = setTheme;
+setTheme = function(theme, paletteIdx) {
+  origSetTheme(theme, paletteIdx);
+  adaptTextColor();
+  applyBeautifulLayout();
+};
+const origSetLang = setLang;
+setLang = function(lang) {
+  origSetLang(lang);
+  adaptTextColor();
+  applyBeautifulLayout();
+};
 
 // Easter egg (Konami code)
 const egg = document.createElement('div');
@@ -299,6 +412,7 @@ async function showFunFact() {
     factBox.innerHTML = `<b>💡 Fun Fact:</b> ${fact}`;
     document.body.appendChild(factBox);
     setTimeout(()=>factBox.classList.add('show-fact'), 100);
+    applyBeautifulLayout();
   } catch {}
 }
 showFunFact();
