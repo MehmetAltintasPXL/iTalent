@@ -9,14 +9,115 @@
 <body>
   <nav id="navbar"></nav>
   <main>
-    <h1>Experiences</h1>
-    <ul class="experiences-list">
-      <li><b>ITProject</b> <span class="emoji">💻</span> <br><span class="desc">Worked on a real-world IT project, collaborating with a team to deliver a cloud-based solution.</span></li>
-      <li><b>Internship Cegeka</b> <span class="emoji">🧑‍💼</span> <br><span class="desc">Gained hands-on experience in a professional IT environment, focusing on automation and support.</span></li>
-      <li><b>Studentjob Hardware Support</b> <span class="emoji">🛠️</span> <br><span class="desc">Provided hardware and technical support to students and staff, troubleshooting and fixing issues.</span></li>
-      <li><b>Committee Member NVAO</b> <span class="emoji">🤝</span> <br><span class="desc">Contributed to quality assurance in education as a student committee member for NVAO.</span></li>
+    <h1 data-i18n="experiences_title">Experiences</h1>
+    <ul class="experiences-list" data-i18n-list="experiences_list">
+      <!-- List will be filled by JS translation -->
     </ul>
+    <section class="project-gallery">
+      <h2 data-i18n="gallery_title">Project Gallery</h2>
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80" alt="Cloud Project" />
+          <div class="caption" data-i18n="gallery_cloud">Cloud Automation Demo</div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Teamwork" />
+          <div class="caption" data-i18n="gallery_team">Team Collaboration</div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Support" />
+          <div class="caption" data-i18n="gallery_support">Support in Action</div>
+        </div>
+      </div>
+    </section>
+    <section class="quote-section">
+      <blockquote data-i18n="quote">“The best way to predict the future is to invent it.” – Alan Kay</blockquote>
+    </section>
   </main>
   <script src="main.js"></script>
+  <style>
+.project-gallery {
+  margin-top: 2.5em;
+}
+.gallery-grid {
+  display: flex;
+  gap: 1.5em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.gallery-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  overflow: hidden;
+  width: 220px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.gallery-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+.gallery-card .caption {
+  padding: 0.7em 1em;
+  font-size: 1.05em;
+  color: #333;
+  background: #f5f6fa;
+}
+.gallery-card:hover {
+  transform: scale(1.04) rotate(-1deg);
+  box-shadow: 0 6px 24px 0 rgba(0,0,0,0.13);
+}
+.quote-section {
+  margin: 2.5em 0 0 0;
+  text-align: center;
+}
+.quote-section blockquote {
+  font-size: 1.3em;
+  font-style: italic;
+  color: #4f8cff;
+  background: #f5f6fa;
+  border-left: 5px solid #4f8cff;
+  border-radius: 8px;
+  padding: 1em 2em;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+</style>
+<script>
+// Add translation keys for experiences page
+if (window.translations) {
+  Object.assign(window.translations.en, {
+    experiences_title: 'Experiences',
+    gallery_title: 'Project Gallery',
+    gallery_cloud: 'Cloud Automation Demo',
+    gallery_team: 'Team Collaboration',
+    gallery_support: 'Support in Action',
+    quote: '“The best way to predict the future is to invent it.” – Alan Kay',
+    experiences_list: [
+      '<b>ITProject</b> <span class="emoji">💻</span> <br><span class="desc">Worked on a real-world IT project, collaborating with a team to deliver a cloud-based solution.</span>',
+      '<b>Internship Cegeka</b> <span class="emoji">🧑‍💼</span> <br><span class="desc">Gained hands-on experience in a professional IT environment, focusing on automation and support.</span>',
+      '<b>Studentjob Hardware Support</b> <span class="emoji">🛠️</span> <br><span class="desc">Provided hardware and technical support to students and staff, troubleshooting and fixing issues.</span>',
+      '<b>Committee Member NVAO</b> <span class="emoji">🤝</span> <br><span class="desc">Contributed to quality assurance in education as a student committee member for NVAO.</span>'
+    ]
+  });
+  Object.assign(window.translations.nl, {
+    experiences_title: 'Ervaringen',
+    gallery_title: 'Projectgalerij',
+    gallery_cloud: 'Cloudautomatisering Demo',
+    gallery_team: 'Teamwerk',
+    gallery_support: 'Support in Actie',
+    quote: '“De beste manier om de toekomst te voorspellen is haar zelf te creëren.” – Alan Kay',
+    experiences_list: [
+      '<b>ITProject</b> <span class="emoji">💻</span> <br><span class="desc">Gewerkt aan een echt IT-project, samen met een team een cloudoplossing geleverd.</span>',
+      '<b>Stage Cegeka</b> <span class="emoji">🧑‍💼</span> <br><span class="desc">Praktijkervaring opgedaan in een professionele IT-omgeving, met focus op automatisering en support.</span>',
+      '<b>Studentenjob Hardware Support</b> <span class="emoji">🛠️</span> <br><span class="desc">Hardware- en technische ondersteuning geboden aan studenten en personeel, problemen opgelost.</span>',
+      '<b>Commissielid NVAO</b> <span class="emoji">🤝</span> <br><span class="desc">Bijgedragen aan kwaliteitszorg in het onderwijs als studentcommissielid voor NVAO.</span>'
+    ]
+  });
+}
+</script>
 </body>
 </html>
