@@ -71,24 +71,18 @@ function applyBeautifulLayout() {
 
 // --- Dropdown Fixes ---
 function setupDropdowns() {
-  // iTalent dropdown
+  // iTalent dropdown (click to toggle, like language)
   document.querySelectorAll('.italent-dropdown').forEach(drop => {
     const parent = drop.parentElement;
     if (parent) {
-      let dropdownTimeout;
-      parent.onmouseenter = () => {
-        clearTimeout(dropdownTimeout);
-        drop.style.display = 'flex';
-      };
-      parent.onmouseleave = () => {
-        dropdownTimeout = setTimeout(() => drop.style.display = 'none', 200);
-      };
-      drop.onmouseenter = () => {
-        clearTimeout(dropdownTimeout);
-        drop.style.display = 'flex';
-      };
-      drop.onmouseleave = () => {
-        dropdownTimeout = setTimeout(() => drop.style.display = 'none', 200);
+      parent.onclick = e => {
+        e.preventDefault();
+        e.stopPropagation();
+        drop.classList.toggle('show-italent');
+        // Close others
+        document.querySelectorAll('.italent-dropdown').forEach(other => {
+          if (other !== drop) other.classList.remove('show-italent');
+        });
       };
     }
   });
@@ -96,7 +90,7 @@ function setupDropdowns() {
   document.addEventListener('click', e => {
     document.querySelectorAll('.italent-dropdown').forEach(drop => {
       if (!drop.contains(e.target) && !drop.parentElement.contains(e.target)) {
-        drop.style.display = 'none';
+        drop.classList.remove('show-italent');
       }
     });
     document.querySelectorAll('.lang-options').forEach(drop => {

@@ -3,60 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects | My Portfolio</title>
+  <title>Experiences | My Portfolio</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <nav id="navbar"></nav>
   <main>
-    <h1 data-i18n="experiences_title">Experiences</h1>
-    <ul class="experiences-list" data-i18n-list="experiences_list">
-      <!-- List will be filled by JS translation -->
-    </ul>
-    <section class="project-gallery">
-      <h2 data-i18n="gallery_title">Project Gallery</h2>
-      <div class="gallery-grid">
-        <div class="gallery-card flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80" alt="Cloud Project" />
-              <div class="caption" data-i18n="gallery_cloud">Cloud Automation Demo</div>
+    <section class="experiences-card">
+      <h1 data-i18n="experiences_title">Experiences</h1>
+      <p class="subtitle">A showcase of my IT journey, teamwork, and achievements.</p>
+      <ul class="experiences-list" data-i18n-list="experiences_list">
+        <!-- List will be filled by JS translation -->
+      </ul>
+      <section class="project-gallery">
+        <h2 data-i18n="gallery_title">Project Gallery</h2>
+        <div class="gallery-grid">
+          <div class="gallery-card flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80" alt="Cloud Project" />
+                <div class="caption" data-i18n="gallery_cloud">Cloud Automation Demo</div>
+              </div>
+              <div class="flip-card-back">
+                <div class="caption">Automated cloud deployment using CI/CD pipelines and infrastructure as code. 🚀</div>
+              </div>
             </div>
-            <div class="flip-card-back">
-              <div class="caption">Automated cloud deployment using CI/CD pipelines and infrastructure as code. 🚀</div>
+          </div>
+          <div class="gallery-card flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Teamwork" />
+                <div class="caption" data-i18n="gallery_team">Team Collaboration</div>
+              </div>
+              <div class="flip-card-back">
+                <div class="caption">Worked in a diverse team, using agile methods to deliver results. 🤝</div>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-card flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Support" />
+                <div class="caption" data-i18n="gallery_support">Support in Action</div>
+              </div>
+              <div class="flip-card-back">
+                <div class="caption">Provided hands-on support and troubleshooting for real users. 🛠️</div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="gallery-card flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Teamwork" />
-              <div class="caption" data-i18n="gallery_team">Team Collaboration</div>
-            </div>
-            <div class="flip-card-back">
-              <div class="caption">Worked in a diverse team, using agile methods to deliver results. 🤝</div>
-            </div>
-          </div>
-        </div>
-        <div class="gallery-card flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Support" />
-              <div class="caption" data-i18n="gallery_support">Support in Action</div>
-            </div>
-            <div class="flip-card-back">
-              <div class="caption">Provided hands-on support and troubleshooting for real users. 🛠️</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="funfact-carousel-section">
-      <div id="funfact-carousel" class="funfact-carousel"></div>
-    </section>
-    <section class="quote-section">
-      <blockquote data-i18n="quote">“The best way to predict the future is to invent it.” – Alan Kay</blockquote>
-      <button id="random-quote-btn" style="margin-top:1em;">🎲 Random Quote</button>
+      </section>
+      <section class="funfact-carousel-section">
+        <div id="funfact-carousel" class="funfact-carousel"></div>
+      </section>
+      <section class="quote-section">
+        <blockquote data-i18n="quote">“The best way to predict the future is to invent it.” – Alan Kay</blockquote>
+        <button id="random-quote-btn" style="margin-top:1em;">🎲 Random Quote</button>
+      </section>
     </section>
   </main>
   <script src="main.js"></script>
