@@ -419,43 +419,6 @@ main {
   font-size: 1.5em;
   margin-left: 0.5em;
 }
-.italent-dropdown {
-  min-width: 260px;
-  font-size: 1.1em;
-  padding: 0.5em 0.5em 0.5em 0.5em;
-  background: var(--nav-bg, #f0f0f0);
-  border-radius: 12px;
-  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.10);
-  z-index: 100;
-}
-.italent-dropdown {
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 2.2rem;
-  background: var(--nav-bg);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  border-radius: 6px;
-  min-width: 180px;
-  flex-direction: column;
-  z-index: 10;
-}
-.italent-dropdown.show-italent {
-  display: flex;
-}
-.italent-dropdown li {
-  margin: 0.5em 0;
-}
-.italent-dropdown a {
-  padding: 0.5em 1em;
-  border-radius: 8px;
-  transition: background 0.2s, color 0.2s;
-}
-.italent-dropdown a:hover {
-  background: var(--accent, #e0f7fa);
-  color: var(--primary-text, #01579b);
-  font-weight: bold;
-}
 .italent-options {
   display: flex;
   flex-wrap: wrap;
