@@ -4,16 +4,7 @@ const navHTML = `
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About Me</a></li>
     <li><a href="experiences.html">Experiences</a></li>
-    <li>
-      <a href="italent.html" id="italentNavBtn">iTalent ▾</a>
-      <ul class="italent-dropdown">
-        <li><a href="italent-internationalization.html">Internationalization</a></li>
-        <li><a href="italent-hackathon.html">Hackathon</a></li>
-        <li><a href="italent-seminaires.html">Seminaires</a></li>
-        <li><a href="italent-pop-sessions.html">Pop Sessions</a></li>
-        <li><a href="italent-student-engagement.html">Engagement</a></li>
-      </ul>
-    </li>
+    <li><a href="italent.html" id="italentNavBtn">iTalent</a></li>
   </ul>
   <div class="nav-actions">
     <button class="theme-switcher" id="themeBtn">🌗 Theme</button>
@@ -71,28 +62,8 @@ function applyBeautifulLayout() {
 
 // --- Dropdown Fixes ---
 function setupDropdowns() {
-  // iTalent dropdown (click to toggle, like language)
-  document.querySelectorAll('.italent-dropdown').forEach(drop => {
-    const parent = drop.parentElement;
-    if (parent) {
-      parent.onclick = e => {
-        e.preventDefault();
-        e.stopPropagation();
-        drop.classList.toggle('show-italent');
-        // Close others
-        document.querySelectorAll('.italent-dropdown').forEach(other => {
-          if (other !== drop) other.classList.remove('show-italent');
-        });
-      };
-    }
-  });
-  // Close dropdowns on outside click
+  // Only handle lang/theme dropdowns now
   document.addEventListener('click', e => {
-    document.querySelectorAll('.italent-dropdown').forEach(drop => {
-      if (!drop.contains(e.target) && !drop.parentElement.contains(e.target)) {
-        drop.classList.remove('show-italent');
-      }
-    });
     document.querySelectorAll('.lang-options').forEach(drop => {
       if (!drop.contains(e.target) && !drop.parentElement.contains(e.target)) {
         drop.classList.remove('show-lang');
@@ -127,7 +98,7 @@ function adaptTextColor() {
     el.style.color = navText;
     el.style.background = 'none';
   });
-  document.querySelectorAll('.italent-dropdown, .lang-options, .theme-options').forEach(drop => {
+  document.querySelectorAll('.lang-options, .theme-options').forEach(drop => {
     drop.style.background = navBg;
     drop.style.color = navText;
     drop.style.boxShadow = '0 4px 24px rgba(0,0,0,0.13)';
@@ -286,16 +257,7 @@ function renderNav() {
       <li><a href="index.html">${t.nav[0]}</a></li>
       <li><a href="about.html">${t.nav[1]}</a></li>
       <li><a href="experiences.html">${t.nav[2]}</a></li>
-      <li class="italent-parent">
-        <a href="italent.html" id="italentNavBtn">${t.nav[3]} ▾</a>
-        <ul class="italent-dropdown">
-          <li><a href="italent-internationalization.html">${t.nav[4]}</a></li>
-          <li><a href="italent-hackathon.html">${t.nav[5]}</a></li>
-          <li><a href="italent-seminaires.html">${t.nav[6]}</a></li>
-          <li><a href="italent-pop-sessions.html">${t.nav[7]}</a></li>
-          <li><a href="italent-student-engagement.html">${t.nav[8]}</a></li>
-        </ul>
-      </li>
+      <li><a href="italent.html" id="italentNavBtn">${t.nav[3]}</a></li>
     </ul>
     <div class="nav-actions">
       ${renderThemeDropdown()}
@@ -339,25 +301,6 @@ function renderNav() {
       link.classList.add('active');
     }
   });
-  // iTalent dropdown click fix
-  const italentBtn = document.getElementById('italentNavBtn');
-  const italentDrop = italentBtn && italentBtn.nextElementSibling;
-  if (italentBtn && italentDrop) {
-    italentBtn.onclick = function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      italentDrop.classList.toggle('show-italent');
-      // Close others
-      document.querySelectorAll('.italent-dropdown').forEach(other => {
-        if (other !== italentDrop) other.classList.remove('show-italent');
-      });
-    };
-    document.addEventListener('click', function(e) {
-      if (!italentDrop.contains(e.target) && e.target !== italentBtn) {
-        italentDrop.classList.remove('show-italent');
-      }
-    });
-  }
 }
 
 function showPalettePicker() {
