@@ -3,7 +3,7 @@ const navHTML = `
   <ul>
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About Me</a></li>
-    <li><a href="projects.html">Experiences</a></li>
+    <li><a href="experiences.html">Experiences</a></li>
     <li>
       <a href="italent.html" id="italentNavBtn">iTalent ▾</a>
       <ul class="italent-dropdown">
@@ -291,7 +291,7 @@ function renderNav() {
     <ul>
       <li><a href="index.html">${t.nav[0]}</a></li>
       <li><a href="about.html">${t.nav[1]}</a></li>
-      <li><a href="projects.html">${t.nav[2]}</a></li>
+      <li><a href="experiences.html">${t.nav[2]}</a></li>
       <li>
         <a href="italent.html" id="italentNavBtn">${t.nav[3]} ▾</a>
         <ul class="italent-dropdown">
@@ -341,7 +341,7 @@ function renderNav() {
   // Highlight active nav link
   const links = document.querySelectorAll('nav ul li a');
   links.forEach(link => {
-    if (window.location.pathname.endswith(link.getAttribute('href'))) {
+    if (window.location.pathname.endsWith(link.getAttribute('href'))) {
       link.classList.add('active');
     }
   });
