@@ -286,7 +286,7 @@ function renderNav() {
       <li><a href="index.html">${t.nav[0]}</a></li>
       <li><a href="about.html">${t.nav[1]}</a></li>
       <li><a href="experiences.html">${t.nav[2]}</a></li>
-      <li>
+      <li class="italent-parent">
         <a href="italent.html" id="italentNavBtn">${t.nav[3]} ▾</a>
         <ul class="italent-dropdown">
           <li><a href="italent-internationalization.html">${t.nav[4]}</a></li>
@@ -339,6 +339,25 @@ function renderNav() {
       link.classList.add('active');
     }
   });
+  // iTalent dropdown click fix
+  const italentBtn = document.getElementById('italentNavBtn');
+  const italentDrop = italentBtn && italentBtn.nextElementSibling;
+  if (italentBtn && italentDrop) {
+    italentBtn.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      italentDrop.classList.toggle('show-italent');
+      // Close others
+      document.querySelectorAll('.italent-dropdown').forEach(other => {
+        if (other !== italentDrop) other.classList.remove('show-italent');
+      });
+    };
+    document.addEventListener('click', function(e) {
+      if (!italentDrop.contains(e.target) && e.target !== italentBtn) {
+        italentDrop.classList.remove('show-italent');
+      }
+    });
+  }
 }
 
 function showPalettePicker() {
