@@ -69,9 +69,9 @@ let cursorEmoji = cursorSelect ? cursorSelect.value : '●';
 if (cursorSelect) {
   cursorSelect.addEventListener('change', () => {
     cursorEmoji = cursorSelect.value;
-    // auto-enable trail when user selects an emoji
-    const trailCheckbox = document.getElementById('trail-checkbox');
-    if (trailCheckbox) trailCheckbox.checked = true;
+    // immediately update custom cursor visual
+    const customCursor = document.getElementById('custom-cursor');
+    if (customCursor) customCursor.textContent = cursorEmoji;
   });
 }
 
@@ -106,24 +106,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+});
 
-  // Mouse trail effect
-  document.addEventListener('mousemove', e => {
-    if (!trailCheckbox || !trailCheckbox.checked) return;
-    const trail = document.createElement('span');
-    trail.className = 'cursor-trail';
-    trail.textContent = cursorEmoji;
-    Object.assign(trail.style, {
-      position: 'absolute',
-      left: e.pageX + 'px',
-      top: e.pageY + 'px',
-      fontSize: '24px',
-      opacity: '1',
-      pointerEvents: 'none',
-      transform: 'translate(-50%, -50%)',
-      transition: 'opacity 0.5s ease-out'
-    });
-    document.body.appendChild(trail);
-    setTimeout(() => trail.remove(), 500);
-  });
+// Custom emoji cursor movement
+const customCursor = document.getElementById('custom-cursor');
+document.addEventListener('mousemove', e => {
+  if (!customCursor) return;
+  customCursor.style.left = e.pageX + 'px';
+  customCursor.style.top = e.pageY + 'px';
+  // update emoji based on current selection
+  customCursor.textContent = cursorEmoji;
 });

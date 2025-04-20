@@ -125,3 +125,17 @@ body.dark-theme h2 { color: #cfcfcf !important; }
 /* Bird flying animation */
 .bird { position: fixed; font-size: 2rem; pointer-events: none; animation: fly 3s ease-out forwards; }
 @keyframes fly { to { transform: translate(500px, -300px); opacity: 0; } }
+
+/* Cursor default is managed by JS emoji cursor, no hiding here */
+
+/* Custom Emoji Cursor */
+body#home { cursor: none; }
+#custom-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  font-size: 1.5rem;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
