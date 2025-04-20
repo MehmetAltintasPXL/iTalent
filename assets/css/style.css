@@ -1,0 +1,39 @@
+/* ...new file... */
+/* Base Reset and Typography */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f6f8; color: #333; line-height: 1.6; }
+h1, h2 { color: #222; }
+a { color: #0066cc; text-decoration: none; transition: color .3s; }
+a:hover { color: #004a99; }
+
+/* Header */
+header { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+header h1 { padding: 1rem; font-size: 2rem; }
+nav ul { display: flex; list-style: none; padding: 1rem; gap: 1rem; justify-content: center; }
+nav a { font-weight: 500; }
+
+/* Sections */
+main { padding: 2rem; max-width: 900px; margin: auto; }
+section { margin-bottom: 3rem; }
+section h2 { margin-bottom: 1rem; border-bottom: 2px solid #0066cc; display: inline-block; padding-bottom: .5rem; }
+ul { list-style: disc inside; }
+
+/* Footer */
+footer { text-align: center; padding: 1rem 0; background: #fff; border-top: 1px solid #e0e0e0; }
+
+/* Responsive */
+@media (max-width: 600px) {
+    nav ul { flex-direction: column; gap: .5rem; }
+    header h1 { text-align: center; }
+}
+
+/* Smooth Scrolling */
+html { scroll-behavior: smooth; }
+
+/* Dark Mode */
+body.dark-theme { background: #1e1e1e; color: #cfcfcf; }
+body.dark-theme header,
+body.dark-theme footer { background: #2a2a2a; box-shadow: none; }
+body.dark-theme a { color: #81a1c1; }
+body.dark-theme a:hover { color: #88c0d0; }
+body.dark-theme section h2 { border-color: #81a1c1; }
