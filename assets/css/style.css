@@ -123,3 +123,12 @@ body.dark-theme h2 { color: #cfcfcf !important; }
   transform: translate(-50%, -50%);
   transition: opacity 0.5s ease-out;
 }
+
+/* Tree line */
+#trees-container { position: fixed; bottom: 0; left: 0; width: 100%; cursor: pointer; z-index: 10; }
+#trees-img { width: 100%; display: block; }
+body.dark-theme #trees-container { display: none; }
+
+/* Bird flying animation */
+.bird { position: fixed; font-size: 2rem; pointer-events: none; animation: fly 3s ease-out forwards; }
+@keyframes fly { to { transform: translate(500px, -300px); opacity: 0; } }

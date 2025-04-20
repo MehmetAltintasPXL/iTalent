@@ -63,10 +63,21 @@ if (jokeButton) {
   });
 }
 
-// Confetti on header click
-const header = document.querySelector('header');
-header.addEventListener('click', () => {
-  // Simple confetti using emoji
+// Settings: Cursor emoji and toggles
+const cursorSelect = document.getElementById('cursor-emoji-select');
+const confettiCheckbox = document.getElementById('confetti-checkbox');
+const trailCheckbox = document.getElementById('trail-checkbox');
+let cursorEmoji = cursorSelect ? cursorSelect.value : '●';
+if (cursorSelect) {
+  cursorSelect.addEventListener('change', () => {
+    cursorEmoji = cursorSelect.value;
+  });
+}
+
+// Confetti on header click (conditional)
+const headerElem = document.querySelector('header');
+headerElem.addEventListener('click', () => {
+  if (!confettiCheckbox.checked) return;
   for (let i = 0; i < 30; i++) {
     const confetti = document.createElement('div');
     confetti.textContent = ['🎉','✨','💥','🥳'][Math.floor(Math.random()*4)];
@@ -88,12 +99,35 @@ header.addEventListener('click', () => {
   }
 });
 
-// Cursor trail effect
+// Mouse trail effect (conditional with chosen emoji)
 document.addEventListener('mousemove', e => {
+  if (!trailCheckbox.checked) return;
   const trail = document.createElement('span');
   trail.className = 'cursor-trail';
+  trail.textContent = cursorEmoji;
+  Object.assign(trail.style, {
+    position: 'absolute',
+    left: e.pageX + 'px',
+    top: e.pageY + 'px',
+    fontSize: '24px',
+    opacity: '1',
+    pointerEvents: 'none',
+    transform: 'translate(-50%, -50%)',
+    transition: 'opacity 0.5s ease-out'
+  });
   document.body.appendChild(trail);
-  trail.style.left = e.pageX + 'px';
-  trail.style.top = e.pageY + 'px';
   setTimeout(() => trail.remove(), 500);
+});
+
+// Bird spawn on tree click
+const treesImg = document.getElementById('trees-img');
+treesImg && treesImg.addEventListener('click', e => {
+  if (document.body.classList.contains('dark-theme')) return;
+  const bird = document.createElement('div');
+  bird.className = 'bird';
+  bird.textContent = '🐦';
+  bird.style.left = `${e.pageX}px`;
+  bird.style.top = `${e.pageY}px`;
+  document.body.appendChild(bird);
+  setTimeout(() => document.body.removeChild(bird), 3000);
 });

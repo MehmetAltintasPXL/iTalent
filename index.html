@@ -73,6 +73,32 @@
 
         <!-- Fun Features: Joke Button -->
         <button id="joke-button">Tell me a joke 🤡</button>
+        
+        <!-- Settings -->
+        <section id="settings">
+            <h2>Settings</h2>
+            <div class="setting-item">
+                <label for="cursor-emoji-select">Cursor Emoji:</label>
+                <select id="cursor-emoji-select">
+                    <option value="●">Circle</option>
+                    <option value="✨">Sparkle ✨</option>
+                    <option value="🎈">Balloon 🎈</option>
+                    <option value="💥">Explosion 💥</option>
+                    <option value="🔥">Fire 🔥</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label><input type="checkbox" id="confetti-checkbox" checked> Enable Confetti on Click</label>
+            </div>
+            <div class="setting-item">
+                <label><input type="checkbox" id="trail-checkbox" checked> Enable Mouse Trail</label>
+            </div>
+        </section>
+
+        <!-- Tree line in light mode -->
+        <div id="trees-container">
+            <img id="trees-img" src="assets/icons/lightmode_trees.png" alt="Tree line">
+        </div>
     </main>
 
     <footer>
