@@ -8,8 +8,6 @@
     <link rel="icon" type="image/png" href="assets/icons/chatgpt.png">
 </head>
 <body id="home">
-    <!-- Custom emoji cursor -->
-    <div id="custom-cursor">●</div>
     <header>
         <h1><a href="index.html">Mehmet Altintas</a></h1>
         <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
@@ -80,14 +78,14 @@
         <section id="settings">
             <h2>Settings</h2>
             <div class="setting-item">
-                <label for="cursor-emoji-select">Cursor Emoji:</label>
-                <select id="cursor-emoji-select">
-                    <option value="●">Circle</option>
-                    <option value="✨">Sparkle ✨</option>
-                    <option value="🎈">Balloon 🎈</option>
-                    <option value="💥">Explosion 💥</option>
-                    <option value="🔥">Fire 🔥</option>
-                </select>
+                <label>Cursor Emoji:</label>
+                <div class="cursor-options">
+                    <button class="cursor-option" data-emoji="●">Circle</button>
+                    <button class="cursor-option" data-emoji="✨">Sparkle</button>
+                    <button class="cursor-option" data-emoji="🎈">Balloon</button>
+                    <button class="cursor-option" data-emoji="💥">Explosion</button>
+                    <button class="cursor-option" data-emoji="🔥">Fire</button>
+                </div>
             </div>
             <div class="setting-item">
                 <label><input type="checkbox" id="confetti-checkbox"> Enable Confetti on Click</label>

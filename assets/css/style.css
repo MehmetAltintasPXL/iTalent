@@ -127,15 +127,3 @@ body.dark-theme h2 { color: #cfcfcf !important; }
 @keyframes fly { to { transform: translate(500px, -300px); opacity: 0; } }
 
 /* Cursor default is managed by JS emoji cursor, no hiding here */
-
-/* Custom Emoji Cursor */
-body#home { cursor: none; }
-#custom-cursor {
-  position: fixed;
-  left: 0;
-  top: 0;
-  font-size: 1.5rem;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 999;
-}

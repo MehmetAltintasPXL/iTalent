@@ -63,17 +63,35 @@ if (jokeButton) {
   });
 }
 
-// Settings: Cursor emoji and toggles
-const cursorSelect = document.getElementById('cursor-emoji-select');
-let cursorEmoji = cursorSelect ? cursorSelect.value : '●';
-if (cursorSelect) {
-  cursorSelect.addEventListener('change', () => {
-    cursorEmoji = cursorSelect.value;
-    // immediately update custom cursor visual
-    const customCursor = document.getElementById('custom-cursor');
-    if (customCursor) customCursor.textContent = cursorEmoji;
-  });
+// Settings: Cursor emoji options via buttons
+let cursorEmoji = '●';
+const cursorButtons = document.querySelectorAll('.cursor-option');
+
+// Function to generate and set CSS cursor from emoji
+function updateCursor(emoji) {
+  const size = 32;
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  ctx.font = '28px serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.clearRect(0, 0, size, size);
+  ctx.fillText(emoji, size / 2, size / 2);
+  const url = canvas.toDataURL('image/png');
+  document.body.style.cursor = `url(${url}) ${size / 2} ${size / 2}, auto`;
 }
+
+cursorButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    cursorEmoji = btn.dataset.emoji;
+    updateCursor(cursorEmoji);
+  });
+});
+
+// Initialize cursor on page load
+updateCursor(cursorEmoji);
 
 // Fun feature controls
 document.addEventListener('DOMContentLoaded', () => {
@@ -106,14 +124,4 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-});
-
-// Custom emoji cursor movement
-const customCursor = document.getElementById('custom-cursor');
-document.addEventListener('mousemove', e => {
-  if (!customCursor) return;
-  customCursor.style.left = e.pageX + 'px';
-  customCursor.style.top = e.pageY + 'px';
-  // update emoji based on current selection
-  customCursor.textContent = cursorEmoji;
 });
