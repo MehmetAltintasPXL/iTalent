@@ -1,20 +1,23 @@
-/* ...new file... */
 /* Base Reset and Typography */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f6f8; color: #333; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+html, body { height: 100%; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f6f8; color: #333; line-height: 1.6; display: flex; flex-direction: column; margin: 0; }
 h1, h2 { color: #222; }
 a { color: #0066cc; text-decoration: none; transition: color .3s; }
 a:hover { color: #004a99; }
 
 /* Header */
-header { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; display: flex; align-items: center; padding: 0 1rem; }
-header h1 { padding: 1rem; font-size: 2rem; }
-nav ul { display: flex; list-style: none; padding: 1rem; gap: 1rem; justify-content: center; }
+header { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; display: flex; align-items: center; padding: 0 1rem; position: relative; }
+header h1 { margin: 0; padding: 1rem 0; font-size: 2rem; }
+nav { margin-left: 2rem; }
+nav ul { display: flex; list-style: none; gap: 1rem; padding: 0; }
 nav a { font-weight: 500; }
 /* Active nav link */
 nav a.active { color: #004a99; border-bottom: 2px solid #004a99; padding-bottom: 0.2rem; }
 #theme-toggle {
-  margin-left: auto;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
   background: #0066cc;
   color: #fff;
   border: none;
@@ -42,9 +45,6 @@ footer { text-align: center; padding: 1rem 0; background: #fff; border-top: 1px 
     nav ul { flex-direction: column; gap: .5rem; }
     header h1 { text-align: center; }
 }
-
-/* Smooth Scrolling */
-html { scroll-behavior: smooth; }
 
 /* Dark Mode */
 body.dark-theme { background: #1e1e1e; color: #cfcfcf; }
