@@ -57,3 +57,27 @@ body.dark-theme #theme-toggle {
   background: #88c0d0;
   color: #2a2a2a;
 }
+
+/* Technologies Carousel */
+#technologies-carousel { padding: 2rem 0; }
+.carousel { position: relative; overflow: hidden; }
+.carousel-track { display: flex; transition: transform 0.4s ease-in-out; }
+.carousel-slide { min-width: 120px; margin: 0 1rem; text-align: center; }
+.carousel-slide img { width: 80px; height: 80px; object-fit: contain; }
+.carousel-slide p { margin-top: 0.5rem; font-size: 0.9rem; }
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #0066cc;
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 5;
+}
+.prev { left: 10px; }
+.next { right: 10px; }
+.prev:disabled, .next:disabled { opacity: 0.5; cursor: default; }
