@@ -11,6 +11,8 @@ header { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: stic
 header h1 { padding: 1rem; font-size: 2rem; }
 nav ul { display: flex; list-style: none; padding: 1rem; gap: 1rem; justify-content: center; }
 nav a { font-weight: 500; }
+/* Active nav link */
+nav a.active { color: #004a99; border-bottom: 2px solid #004a99; padding-bottom: 0.2rem; }
 
 /* Sections */
 main { padding: 2rem; max-width: 900px; margin: auto; }
