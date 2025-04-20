@@ -27,11 +27,24 @@
   <main>
     <section>
       <h2>Hackathons</h2>
-      <ul>
-        <li><strong>Hack the Future</strong> (Nov 19, 2024) – AWS integration challenges with serverless architectures.</li>
-        <li><strong>Hack for Good</strong> (Feb 1–2, 2025) – Chatbot for Red Cross using Streamlit and local AI.</li>
-        <li><strong>AE Hacktopia – Terraforming Tomorrow</strong> (Mar 1, 2025) – Planet simulation and environmental datasets challenge.</li>
-      </ul>
+      <!-- Hackathon entries as detailed articles -->
+      <article>
+        <h3>Hack the Future</h3>
+        <p>On November 19, 2024, during Hack the Future, our team tackled progressive AWS integration challenges. We built serverless workflows combining EventBridge, Lambda, S3, and AI services, ultimately automating end-to-end tasks under time pressure.</p>
+      </article>
+      <article>
+        <h3>Hack for Good (The Hague)</h3>
+        <p>At the Hackathon for Good in The Hague (Feb 1–2, 2025), our team was tasked with building a chatbot for the Red Cross within 48 hours. The chatbot had to enable easy communication not only via text but also with emojis and images. I participated alongside my fellow students from PXL: Mirthe Reynerds, Kerim Böyükak, and Maarten De Vriendt. My personal objective was to build a chatbot myself for the first time and gain experience with open-source technologies like Streamlit and Ollama.</p>
+        <p>We clearly divided roles: Kerim and Maarten crafted a clean Angular frontend with buttons for text, emojis, and media; Mirthe prepared a polished PowerPoint presentation; and I focused on backend development and server management. I chose Streamlit to quickly develop a Python-based chatbot capable of understanding questions and emojis, and I ran the service on an AWS EC2 server. To avoid cloud costs, I used Ollama to host the LLaMA 2 model locally, keeping the solution entirely open-source.</p>
+        <p>To ensure reliable answers, I implemented a Python script that automatically crawled the Red Cross website, extracting essential information and storing it in a JSON file with links to original sources. This Retrieval-Augmented Generation (RAG) approach guaranteed factual responses rather than guesses.</p>
+        <p>Next, I containerized the entire backend in Docker, enabling straightforward deployment and recovery. Initially, performance was limited by our first server, but AWS engineer Lukas provided a more powerful EC2 instance, greatly improving response times.</p>
+        <p>At the end of the hackathon, a jury evaluated all entries. Despite arriving immediately after exams and working without external support, we did not win a prize but were proud of our open-source, fully functional chatbot and our ability to learn and collaborate effectively under tight deadlines.</p>
+        <p>Through this experience, I learned the importance of clear task division, rapid prototyping, and requesting help when needed. My strengths were perseverance and adaptability; I gained confidence in using Streamlit, Docker, and AI models. For future projects, I aim to allocate more time for thorough testing. This hackathon aligns well with my studies in AWS, Docker, Python, and AI, and demonstrates my capacity to deliver impactful solutions under pressure.</p>
+      </article>
+      <article>
+        <h3>AE Hacktopia – Terraforming Tomorrow</h3>
+        <p>On March 1, 2025, at AE Hacktopia, our challenge was to recreate a livable planet using provided datasets. We designed data pipelines and algorithms to simulate environmental processes, showcasing creative problem-solving in a time-boxed event.</p>
+      </article>
     </section>
   </main>
 
