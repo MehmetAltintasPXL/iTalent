@@ -69,6 +69,9 @@ let cursorEmoji = cursorSelect ? cursorSelect.value : '●';
 if (cursorSelect) {
   cursorSelect.addEventListener('change', () => {
     cursorEmoji = cursorSelect.value;
+    // auto-enable trail when user selects an emoji
+    const trailCheckbox = document.getElementById('trail-checkbox');
+    if (trailCheckbox) trailCheckbox.checked = true;
   });
 }
 
