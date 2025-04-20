@@ -124,4 +124,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Color trail effect
+  const colorPicker = document.getElementById('trail-color-picker');
+  document.addEventListener('mousemove', e => {
+    if (!trailCheckbox || !trailCheckbox.checked) return;
+    const dot = document.createElement('div');
+    dot.className = 'color-trail';
+    dot.style.background = colorPicker ? colorPicker.value : '#ffcc00';
+    dot.style.left = e.pageX + 'px';
+    dot.style.top = e.pageY + 'px';
+    document.body.appendChild(dot);
+    setTimeout(() => {
+      dot.remove();
+    }, 500);
+  });
 });

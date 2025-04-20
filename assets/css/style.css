@@ -126,4 +126,16 @@ body.dark-theme h2 { color: #cfcfcf !important; }
 .bird { position: fixed; font-size: 2rem; pointer-events: none; animation: fly 3s ease-out forwards; }
 @keyframes fly { to { transform: translate(500px, -300px); opacity: 0; } }
 
+/* Color Trail */
+.color-trail {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.7;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
 /* Cursor default is managed by JS emoji cursor, no hiding here */
