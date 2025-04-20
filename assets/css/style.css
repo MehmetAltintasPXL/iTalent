@@ -33,7 +33,7 @@ nav a.active { color: #004a99; border-bottom: 2px solid #004a99; padding-bottom:
 }
 
 /* Sections */
-main { padding: 2rem; max-width: 900px; margin: auto; flex: 1; }
+main { padding: 2rem; max-width: 900px; margin: auto; flex: 1; padding-bottom: 200px; }  /* adjust height based on tree image height */
 section { margin-bottom: 3rem; }
 section h2 { margin-bottom: 1rem; border-bottom: 2px solid #0066cc; display: inline-block; padding-bottom: .5rem; }
 ul { list-style: disc inside; }
@@ -125,7 +125,14 @@ body.dark-theme h2 { color: #cfcfcf !important; }
 }
 
 /* Tree line */
-#trees-container { position: fixed; bottom: 0; left: 0; width: 100%; cursor: pointer; z-index: 10; }
+#trees-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;            /* send behind content */
+  pointer-events: none;   /* clicks pass through */
+}
 #trees-img { width: 100%; display: block; }
 body.dark-theme #trees-container { display: none; }
 
