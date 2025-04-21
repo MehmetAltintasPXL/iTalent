@@ -160,3 +160,56 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500);
   });
 });
+
+// Custom Terminal Functionality
+(function() {
+  const term = document.getElementById('customTerminal');
+  const minBtn = document.getElementById('term-min-btn');
+  const closeBtn = document.getElementById('term-close-btn');
+  const body = document.getElementById('termBody');
+  const input = document.getElementById('termInput');
+
+  // Toggle minimize
+  minBtn.addEventListener('click', () => {
+    term.classList.toggle('minimized');
+  });
+  // Close terminal
+  closeBtn.addEventListener('click', () => {
+    term.style.display = 'none';
+  });
+
+  // Utility: print line
+  function print(text) {
+    const p = document.createElement('p');
+    p.textContent = text;
+    body.appendChild(p);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  // Command handler
+  input.addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    const cmd = input.value.trim().toLowerCase();
+    switch (cmd) {
+      case 'help':
+        print("Available commands: help, date, joke, clear, sandwich");
+        break;
+      case 'date':
+        print(new Date().toString());
+        break;
+      case 'joke':
+        print(jokes[Math.floor(Math.random()*jokes.length)]);
+        break;
+      case 'clear':
+        body.innerHTML = '';
+        break;
+      case 'sandwich':
+      case 'sudo make me a sandwich':
+        print("Okay. Make it yourself.");
+        break;
+      default:
+        print(`Command not found: ${cmd}`);
+    }
+    input.value = '';
+  });
+})();
