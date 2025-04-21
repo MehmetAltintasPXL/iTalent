@@ -166,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const term = document.getElementById('customTerminal');
   const minBtn = document.getElementById('term-min-btn');
   const closeBtn = document.getElementById('term-close-btn');
+  const maxBtn = document.getElementById('term-max-btn');
   const body = document.getElementById('termBody');
   const input = document.getElementById('termInput');
 
@@ -185,6 +186,15 @@ document.addEventListener('DOMContentLoaded', () => {
       minBtn.textContent = '▢';
       minBtn.title = 'Expand';
     } else {
+      minBtn.textContent = '_';
+      minBtn.title = 'Minimize';
+    }
+  });
+
+  // Expand terminal on green zoom button click
+  maxBtn.addEventListener('click', () => {
+    if (term.classList.contains('minimized')) {
+      term.classList.remove('minimized');
       minBtn.textContent = '_';
       minBtn.title = 'Minimize';
     }

@@ -185,52 +185,15 @@ body.dark-theme h2 { color: #cfcfcf !important; }
   display: flex; flex-direction: column;
   z-index: 200;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  transition: height 0.3s ease;
 }
 .custom-terminal.minimized {
   height: 30px;
 }
-.custom-terminal .terminal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #333;
-  padding: 2px 5px;
-  border-bottom: 1px solid #444;
-  cursor: move;
-  border-radius: 5px 5px 0 0;
-}
-.custom-terminal .term-title {
-  font-size: 0.9em;
-}
-.custom-terminal .term-controls button {
-  background: transparent;
-  border: none;
-  color: #e0e0e0;
-  width: 20px;
-  height: 20px;
-  margin-left: 5px;
-  cursor: pointer;
-}
-.custom-terminal .terminal-body {
-  flex: 1;
-  padding: 5px;
-  overflow-y: auto;
-  font-size: 0.9em;
-}
-.custom-terminal .terminal-input {
-  border: none;
-  outline: none;
-  background: transparent;
-  color: #e0e0e0;
-  width: 100%;
-  font-family: monospace;
-  font-size: 1em;
-  padding: 3px 5px;
-}
-
 /* Realistic Custom Terminal Window */
 .custom-terminal {
   width: 350px;
+  height: 250px; /* restored full height */
   background: transparent;
   box-shadow: none;
 }
@@ -283,6 +246,11 @@ body.dark-theme h2 { color: #cfcfcf !important; }
   left: auto;
   text-align: left;
   overflow: visible;
+}
+
+/* Force minimized height override at end */
+.custom-terminal.minimized {
+  height: 30px !important;
 }
 
 @media (max-width: 600px) {
