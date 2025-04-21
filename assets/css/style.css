@@ -139,3 +139,12 @@ body.dark-theme h2 { color: #cfcfcf !important; }
 }
 
 /* Cursor default is managed by JS emoji cursor, no hiding here */
+
+/* Article Images */
+.article-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+}
