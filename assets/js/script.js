@@ -53,7 +53,27 @@ const jokes = [
   "How many programmers does it take to change a light bulb? None, that's a hardware issue! 💡",
   "Why do Java developers wear glasses? Because they don't see sharp! 🤓",
   "What's a programmer's favorite hangout place? Foo Bar! 🍻",
-  "Why do Python programmers have low self-esteem? They're constantly comparing their self to others! 🐍"
+  "Why do Python programmers have low self-esteem? They're constantly comparing their self to others! 🐍",
+  "I would tell you a UDP joke, but you might not get it.",
+  "There’s no place like 127.0.0.1.",
+  "Why do Java developers wear glasses? Because they don’t C#.",
+  "I changed my password to 'incorrect', so whenever I forget it, my computer tells me.",
+  "Debugging: Being the detective in a crime movie where you are also the murderer.",
+  "I told my computer I needed a break, and it said 'No problem, I’ll go to sleep.'",
+  "A SQL query walks into a bar, walks up to two tables and asks: 'Can I join you?'",
+  "I’m not lazy, I’m just on energy-saving mode.",
+  "The cloud is just someone else’s computer.",
+  "Wi-Fi went down for five minutes, so I had to talk to my family. They seem like nice people.",
+  "I would make a joke about JavaScript, but you wouldn’t get the callback.",
+  "Why was the computer cold? It left its Windows open.",
+  "My code doesn’t always work, but when it does, I don’t know why.",
+  "I use tabs and spaces... to start wars.",
+  "To err is human, to really screw things up you need a computer.",
+  "How do you comfort a JavaScript bug? You console it.",
+  "I have a joke about IPv6, but no one uses it.",
+  "Computers are like air conditioners: they stop working properly if you open Windows.",
+  "I keep hitting the escape key, but I’m still here.",
+  "The only thing I test in production is my patience."
 ];
 const jokeButton = document.getElementById('joke-button');
 if (jokeButton) {
