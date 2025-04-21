@@ -164,6 +164,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // Custom Terminal Functionality
 (function() {
   const term = document.getElementById('customTerminal');
+  // Initialize terminal state from previous pages
+  const savedState = localStorage.getItem('termMinimized');
+  if (savedState === 'true') {
+    term.classList.add('minimized');
+  } else {
+    term.classList.remove('minimized');
+  }
   const minBtn = document.getElementById('term-min-btn');
   const closeBtn = document.getElementById('term-close-btn');
   const maxBtn = document.getElementById('term-max-btn');
@@ -182,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Toggle minimize/expand on click
   minBtn.addEventListener('click', () => {
     const minimized = term.classList.toggle('minimized');
+    localStorage.setItem('termMinimized', minimized.toString());
     if (minimized) {
       minBtn.textContent = '▢';
       minBtn.title = 'Expand';
@@ -195,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
   maxBtn.addEventListener('click', () => {
     if (term.classList.contains('minimized')) {
       term.classList.remove('minimized');
+      localStorage.setItem('termMinimized', 'false');
       minBtn.textContent = '_';
       minBtn.title = 'Minimize';
     }
