@@ -105,17 +105,15 @@
 
     <!-- Custom Terminal -->
     <div class="custom-terminal minimized" id="customTerminal">
-        <div class="terminal-header">
-            <span class="term-title">Mehmet's Terminal</span>
-            <div class="term-controls">
-                <button id="term-min-btn" title="Minimize">_</button>
-                <button id="term-close-btn" title="Close">×</button>
-            </div>
-        </div>
-        <div class="terminal-body" id="termBody">
-            <p>Type 'help' to see available commands.</p>
-        </div>
-        <input type="text" class="terminal-input" id="termInput" placeholder="Enter command...">
+      <div class="fakeMenu">
+        <div id="term-close-btn" class="fakeButtons fakeClose"></div>
+        <div id="term-min-btn" class="fakeButtons fakeMinimize"></div>
+        <div class="fakeButtons fakeZoom"></div>
+      </div>
+      <div class="fakeScreen" id="termBody">
+        <p>Type 'help' to see available commands.</p>
+      </div>
+      <input type="text" class="terminal-input" id="termInput" placeholder="Enter command...">
     </div>
 </body>
 </html>
