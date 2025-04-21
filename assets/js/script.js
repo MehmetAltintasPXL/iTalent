@@ -177,6 +177,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const body = document.getElementById('termBody');
   const input = document.getElementById('termInput');
 
+  // Ensure the input is inside the fakeScreen for styling and focus
+  if (input.parentElement !== body) {
+    body.appendChild(input);
+  }
+
   // Set initial minimize/expand button state
   if (term.classList.contains('minimized')) {
     minBtn.textContent = '▢';
@@ -206,6 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('termMinimized', 'false');
       minBtn.textContent = '_';
       minBtn.title = 'Minimize';
+      input.focus();
     }
   });
 
@@ -213,6 +219,14 @@ document.addEventListener('DOMContentLoaded', () => {
   closeBtn.addEventListener('click', () => {
     term.style.display = 'none';
   });
+
+  // Focus input when clicking anywhere on terminal
+  term.addEventListener('click', () => input.focus());
+
+  // Autofocus input if terminal is not minimized
+  if (!term.classList.contains('minimized')) {
+    input.focus();
+  }
 
   // Utility: print line
   function print(text) {
@@ -224,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Command handler
   input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') e.preventDefault();
     if (e.key !== 'Enter') return;
     const cmd = input.value.trim().toLowerCase();
     switch (cmd) {
