@@ -89,6 +89,19 @@ body.dark-theme h2 { color: #cfcfcf !important; }
 .tech-icons { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 1rem 0; }
 .tech-icons img { width: 60px; height: 60px; object-fit: contain; }
 
+/* Hackathon Technology Icons */
+.hack-tech-icons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.hack-tech-icons img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
 /* Contact Section */
 .contact-icons { display: flex; align-items: center; gap: 1rem; justify-content: center; margin: 1.5rem 0; }
 .contact-icons a { display: flex; align-items: center; gap: 0.5rem; color: #333; background: #fff; padding: 0.5rem 1rem; border-radius: 4px; border: 1px solid #ccc; transition: background 0.3s; text-decoration: none; }
@@ -146,7 +159,7 @@ body.dark-theme h2 { color: #cfcfcf !important; }
   max-width: 400px;
   height: auto;
   display: block;
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem;
 }
 
 /* Article Logos */
