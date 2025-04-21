@@ -169,10 +169,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const body = document.getElementById('termBody');
   const input = document.getElementById('termInput');
 
-  // Toggle minimize
+  // Set initial minimize/expand button state
+  if (term.classList.contains('minimized')) {
+    minBtn.textContent = '▢';
+    minBtn.title = 'Expand';
+  } else {
+    minBtn.textContent = '_';
+    minBtn.title = 'Minimize';
+  }
+
+  // Toggle minimize/expand on click
   minBtn.addEventListener('click', () => {
-    term.classList.toggle('minimized');
+    const minimized = term.classList.toggle('minimized');
+    if (minimized) {
+      minBtn.textContent = '▢';
+      minBtn.title = 'Expand';
+    } else {
+      minBtn.textContent = '_';
+      minBtn.title = 'Minimize';
+    }
   });
+
   // Close terminal
   closeBtn.addEventListener('click', () => {
     term.style.display = 'none';
