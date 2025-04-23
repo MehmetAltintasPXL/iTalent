@@ -284,5 +284,6 @@ document.addEventListener('DOMContentLoaded', () => {
         print(`bash: ${lc}: command not found. Maybe try 'help'? 😜`);
     }
     input.value = '';
+    input.focus();
   });
 })();
