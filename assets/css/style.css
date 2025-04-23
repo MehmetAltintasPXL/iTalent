@@ -89,6 +89,14 @@ body.dark-theme h2 { color: #cfcfcf !important; }
 .tech-icons { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 1rem 0; }
 .tech-icons img { width: 60px; height: 60px; object-fit: contain; }
 
+/* Technology icons contrast background */
+.tech-icons img,
+.hack-tech-icons img {
+  background-color: #fff;
+  padding: 6px;
+  border-radius: 8px;
+}
+
 /* Hackathon Technology Icons */
 .hack-tech-icons {
   display: flex;
