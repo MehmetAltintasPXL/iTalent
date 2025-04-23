@@ -84,7 +84,7 @@ if (jokeButton) {
 }
 
 // Settings: Cursor emoji options via buttons
-let cursorEmoji = '👆';
+let cursorEmoji = null;
 const cursorButtons = document.querySelectorAll('.cursor-option');
 
 // Function to generate and set CSS cursor from emoji
@@ -110,8 +110,8 @@ cursorButtons.forEach(btn => {
   });
 });
 
-// Initialize cursor on page load
-updateCursor(cursorEmoji);
+// Initialize default cursor to regular arrow
+document.body.style.cursor = 'auto';
 
 // Fun feature controls
 document.addEventListener('DOMContentLoaded', () => {
@@ -211,6 +211,11 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('termMinimized', 'false');
       minBtn.textContent = '_';
       minBtn.title = 'Minimize';
+      // Reset terminal: clear history and show initial prompt
+      body.innerHTML = '';
+      const initP = document.createElement('p');
+      initP.textContent = "Type 'help' to see available commands.";
+      body.appendChild(initP);
       input.focus();
     }
   });
