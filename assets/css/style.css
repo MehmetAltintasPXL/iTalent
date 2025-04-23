@@ -284,10 +284,8 @@ body.dark-theme h2 { color: #cfcfcf !important; }
   margin: 4px 0;
   padding: 0;
   white-space: pre-wrap;
-  width: auto;
-  left: auto;
   text-align: left;
-  overflow: visible;
+  line-height: 1.4em;
 }
 
 /* Force minimized height override at end */
