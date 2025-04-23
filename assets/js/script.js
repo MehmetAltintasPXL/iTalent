@@ -243,6 +243,15 @@ document.addEventListener('DOMContentLoaded', () => {
     input.focus();
   }
 
+  // State for quiz and chat easter eggs
+  const quizQuestions = [
+    { question: 'Wat is mijn favoriete Linux-distro?', answer: 'ubuntu' },
+    { question: 'Wat is mijn favoriete programmeertaal?', answer: 'javascript' },
+    { question: 'Welke editor gebruik ik meestal?', answer: 'vscode' }
+  ];
+  let quizState = { active: false, index: 0, score: 0 };
+  let chatActive = false;
+  
   const MAX_LINES = 8;  // cap terminal history to avoid overcrowding
   
   // Utility: print line
@@ -263,9 +272,58 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key !== 'Enter') return;
     const cmd = input.value.trim();
     const lc = cmd.toLowerCase();
+    
+    // Handle quiz answers
+    if (quizState.active) {
+      const correct = quizQuestions[quizState.index].answer;
+      if (lc === correct) {
+        print('Goed! 🎉'); quizState.score++;
+      } else {
+        print('Helaas, correct was: ' + correct);
+      }
+      quizState.index++;
+      if (quizState.index < quizQuestions.length) {
+        print('Vraag ' + (quizState.index + 1) + ': ' + quizQuestions[quizState.index].question);
+      } else {
+        print('Quiz klaar! Score: ' + quizState.score + '/' + quizQuestions.length + '. Nerd-level: ' + (quizState.score * 10) + '%');
+        quizState = { active: false, index: 0, score: 0 };
+      }
+      input.value = '';
+      input.focus();
+      return;
+    }
+    
+    // Handle chat interaction
+    if (chatActive) {
+      print('Aha, FBI detected. Volgende vraag? (of exit)');
+      chatActive = false;
+      input.value = '';
+      input.focus();
+      return;
+    }
+
     switch (true) {
+      case lc === 'sudo':
+        print('Nice try, maar je hebt geen root op mijn leven.');
+        break;
+      case lc === 'rm -rf /':
+        print('💥 Systeem vernietigd. Je hebt nu een Tamagotchi.');
+        break;
+      case lc === 'ls':
+        print('Ugh, altijd nieuwsgierig zeker?');
+        break;
       case lc === 'help':
-        print('Available: help, date, joke, clear, sandwich, ls, pwd, whoami, sudo, uptime, echo, uname, fortune, sl, cowsay, date -u, cal, htop, rickroll, make coffee, dance, weather, matrix, sudo reboot, ssh, ping, grep, curl, su');
+        print('Jij wil altijd hulp hé… oké dan:');
+        print('Beschikbare: help, ls, sudo, rm -rf /, quiz, chat + originele commands');
+        break;
+      case lc === 'quiz':
+        quizState.active = true;
+        print('Quiz gestart!');
+        print('Vraag 1: ' + quizQuestions[0].question);
+        break;
+      case lc === 'chat':
+        chatActive = true;
+        print('Wat wil je weten van de mysterieuze Altıntaş?');
         break;
       case lc === 'date':
         print(new Date().toString());
