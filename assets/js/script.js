@@ -240,26 +240,48 @@ document.addEventListener('DOMContentLoaded', () => {
   input.addEventListener('keydown', e => {
     if (e.key === 'Enter') e.preventDefault();
     if (e.key !== 'Enter') return;
-    const cmd = input.value.trim().toLowerCase();
-    switch (cmd) {
-      case 'help':
-        print("Available commands: help, date, joke, clear, sandwich");
+    const cmd = input.value.trim();
+    const lc = cmd.toLowerCase();
+    switch (true) {
+      case lc === 'help':
+        print('Available: help, date, joke, clear, sandwich, ls, pwd, whoami, sudo, uptime, echo, uname');
         break;
-      case 'date':
+      case lc === 'date':
         print(new Date().toString());
         break;
-      case 'joke':
-        print(jokes[Math.floor(Math.random()*jokes.length)]);
+      case lc === 'joke':
+        print(jokes[Math.floor(Math.random() * jokes.length)]);
         break;
-      case 'clear':
+      case lc === 'clear':
         body.innerHTML = '';
         break;
-      case 'sandwich':
-      case 'sudo make me a sandwich':
-        print("Okay. Make it yourself.");
+      case lc === 'sandwich':
+      case lc === 'sudo make me a sandwich':
+        print('Oh, I thought you said "sudo make me a sandwich"! You deserve it though.');
+        break;
+      case lc === 'ls':
+        print('Desktop  Documents  Downloads  Music  Pictures  Videos');
+        break;
+      case lc === 'pwd':
+        print('/home/mehme/projects/iTalent');
+        break;
+      case lc === 'whoami':
+        print('root (but remember: with great power comes great responsibility)');
+        break;
+      case lc.startsWith('sudo '):
+        print('Nice try! Even sudo needs permission from the owner of the universe.');
+        break;
+      case lc === 'uptime':
+        print('up 42 days, 6 hours, 13 minutes — living the dream');
+        break;
+      case lc.startsWith('echo '):
+        print(cmd.substring(5));
+        break;
+      case lc === 'uname':
+        print('Linux iTalent 5.0.0-humor #1 SMP hilarious x86_64');
         break;
       default:
-        print(`Command not found: ${cmd}`);
+        print(`bash: ${lc}: command not found. Maybe try 'help'? 😜`);
     }
     input.value = '';
   });
