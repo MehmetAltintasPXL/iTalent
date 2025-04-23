@@ -286,6 +286,10 @@ body.dark-theme h2 { color: #cfcfcf !important; }
 .custom-terminal.minimized {
   height: 30px !important;
 }
+.custom-terminal.minimized .fakeScreen,
+.custom-terminal.minimized .terminal-input {
+  display: none !important;
+}
 
 /* Override to pin custom terminal to viewport bottom-right */
 .custom-terminal {
@@ -294,6 +298,8 @@ body.dark-theme h2 { color: #cfcfcf !important; }
   right: 0 !important;
   left: auto !important;
   z-index: 9999 !important;
+  width: 500px !important;
+  height: 350px !important;
 }
 
 @media (max-width: 600px) {

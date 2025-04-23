@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lc = cmd.toLowerCase();
     switch (true) {
       case lc === 'help':
-        print('Available: help, date, joke, clear, sandwich, ls, pwd, whoami, sudo, uptime, echo, uname');
+        print('Available: help, date, joke, clear, sandwich, ls, pwd, whoami, sudo, uptime, echo, uname, fortune, sl');
         break;
       case lc === 'date':
         print(new Date().toString());
@@ -279,6 +279,25 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       case lc === 'uname':
         print('Linux iTalent 5.0.0-humor #1 SMP hilarious x86_64');
+        break;
+      // Humorous fortune-telling command
+      case lc === 'fortune':
+        const fortunes = [
+          "You will find a bug where there wasn't one.",
+          "Tomorrow, you shall commit code that doesn't compile.",
+          "A commit a day keeps the support team away.",
+          "Your legacy code will one day give rise to AI.",
+          "The Cloud is just someone else's computer... again."
+        ];
+        print(fortunes[Math.floor(Math.random() * fortunes.length)]);
+        break;
+      // Train animation command
+      case lc === 'sl':
+        print('       ====        ________ ');
+        print('  ____/ ___\\_____ / __ \\__  \\');
+        print(' /    \\___  >____ \\\\  ___/  / /');
+        print(' \\______  /     \\/ \\___  >____');
+        print('        \\/           \\/');
         break;
       default:
         print(`bash: ${lc}: command not found. Maybe try 'help'? 😜`);
