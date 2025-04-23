@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lc = cmd.toLowerCase();
     switch (true) {
       case lc === 'help':
-        print('Available: help, date, joke, clear, sandwich, ls, pwd, whoami, sudo, uptime, echo, uname, fortune, sl');
+        print('Available: help, date, joke, clear, sandwich, ls, pwd, whoami, sudo, uptime, echo, uname, fortune, sl, cowsay, date -u, cal, htop, rickroll, make coffee, dance, weather, matrix, sudo reboot, ssh, ping, grep, curl, su');
         break;
       case lc === 'date':
         print(new Date().toString());
@@ -286,7 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
       case lc === 'uname':
         print('Linux iTalent 5.0.0-humor #1 SMP hilarious x86_64');
         break;
-      // Humorous fortune-telling command
       case lc === 'fortune':
         const fortunes = [
           "You will find a bug where there wasn't one.",
@@ -297,13 +296,73 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
         print(fortunes[Math.floor(Math.random() * fortunes.length)]);
         break;
-      // Train animation command
       case lc === 'sl':
         print('       ====        ________ ');
         print('  ____/ ___\\_____ / __ \\__  \\');
         print(' /    \\___  >____ \\\\  ___/  / /');
         print(' \\______  /     \\/ \\___  >____');
         print('        \\/           \\/');
+        break;
+      case lc === 'cowsay':
+        print(' __________');
+        print('< Moochtacular! >');
+        print(' ----------');
+        print('    \\   ^__^');
+        print('     \\  (oo)\\_______');
+        print('        (__)\\       )\\/\\');
+        print('            ||----w |');
+        print('            ||     ||');
+        break;
+      case lc === 'date -u':
+        print(new Date().toUTCString());
+        break;
+      case lc === 'cal':
+        print(' Su Mo Tu We Th Fr Sa');
+        print('    1  2  3  4  5');
+        print(' 6  7  8  9 10 11 12');
+        print('13 14 15 16 17 18 19');
+        print('20 21 22 23 24 25 26');
+        print('27 28 29 30');
+        break;
+      case lc === 'htop':
+        print('PID USER      CPU% MEM% COMMAND');
+        print('1234 root      99.9  1.2 top');
+        print('...overloaded...');
+        break;
+      case lc === 'rickroll':
+        print('Never gonna give you up');
+        print('Never gonna let you down');
+        break;
+      case lc === 'make coffee':
+        print('Brewing your coffee... ☕️');
+        break;
+      case lc === 'dance':
+        print('<(^_^<)  (>-^)>  \( ^_^)\>');
+        break;
+      case lc === 'weather':
+        print('Today: Sunny with a chance of semicolons.');
+        break;
+      case lc === 'matrix':
+        print('01010100 01101000 01101001 01110011');
+        break;
+      case lc === 'sudo reboot':
+        print('Sorry, the system is busy. Try later.');
+        break;
+      case lc === 'ssh':
+        print('ssh: Permission denied (publickey).');
+        break;
+      case lc === 'ping':
+        print('Pinging google.com 56(84) bytes of data.');
+        print('64 bytes from google.com: icmp_seq=1 ttl=115 time=14.2 ms');
+        break;
+      case lc === 'grep':
+        print('grep: pattern not found');
+        break;
+      case lc === 'curl':
+        print('curl: (6) Could not resolve host: example.com');
+        break;
+      case lc === 'su':
+        print('Switching user... not today.');
         break;
       default:
         print(`bash: ${lc}: command not found. Maybe try 'help'? 😜`);
