@@ -84,7 +84,7 @@ if (jokeButton) {
 }
 
 // Settings: Cursor emoji options via buttons
-let cursorEmoji = '●';
+let cursorEmoji = '💻';
 const cursorButtons = document.querySelectorAll('.cursor-option');
 
 // Function to generate and set CSS cursor from emoji
