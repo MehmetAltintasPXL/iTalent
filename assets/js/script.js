@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     input.focus();
   }
 
-  const MAX_LINES = 50;  // cap terminal history to avoid overcrowding
+  const MAX_LINES = 8;  // cap terminal history to avoid overcrowding
   
   // Utility: print line
   function print(text) {
