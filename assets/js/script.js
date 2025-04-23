@@ -228,11 +228,17 @@ document.addEventListener('DOMContentLoaded', () => {
     input.focus();
   }
 
+  const MAX_LINES = 50;  // cap terminal history to avoid overcrowding
+  
   // Utility: print line
   function print(text) {
     const p = document.createElement('p');
     p.textContent = text;
     body.appendChild(p);
+    // remove oldest lines if over max
+    while (body.children.length > MAX_LINES) {
+      body.removeChild(body.firstChild);
+    }
     body.scrollTop = body.scrollHeight;
   }
 
