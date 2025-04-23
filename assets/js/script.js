@@ -206,18 +206,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Reset and expand terminal on green zoom button click
   maxBtn.addEventListener('click', () => {
-    // Expand if minimized
+    // Expand terminal if minimized
     if (term.classList.contains('minimized')) {
       term.classList.remove('minimized');
       localStorage.setItem('termMinimized', 'false');
       minBtn.textContent = '_';
       minBtn.title = 'Minimize';
     }
-    // Always reset terminal history
-    body.innerHTML = '';
-    const initP = document.createElement('p');
-    initP.textContent = "Type 'help' to see available commands.";
-    body.appendChild(initP);
+
+    // Clear only the printed lines, keep input intact
+    body.querySelectorAll('p').forEach(p => p.remove());
+
+    // Add initial prompt
+    const prompt = document.createElement('p');
+    prompt.textContent = "Type 'help' to see available commands.";
+    body.appendChild(prompt);
+
+    // Ensure input stays inside terminal
+    if (input.parentElement !== body) {
+      body.appendChild(input);
+    }
+
     input.focus();
   });
 
