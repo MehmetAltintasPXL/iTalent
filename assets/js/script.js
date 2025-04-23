@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       case lc === 'help':
         print('Jij wil altijd hulp hé… oké dan:');
-        print('Beschikbare: help, ls, sudo, rm -rf /, quiz, chat + originele commands');
+        print("Beschikbare commando's: help, date, date -u, joke, clear, sandwich, sudo, rm -rf /, ls, pwd, whoami, echo <text>, uptime, uname, fortune, sl, cowsay, cal, htop, rickroll, make coffee, dance, weather, matrix, sudo reboot, ssh, ping, grep, curl, su, quiz, chat");
         break;
       case lc === 'quiz':
         quizState.active = true;
