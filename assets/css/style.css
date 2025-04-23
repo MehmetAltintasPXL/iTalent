@@ -172,27 +172,24 @@ body.dark-theme h2 { color: #cfcfcf !important; }
 
 /* Custom Terminal */
 .custom-terminal {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   right: 0;
+  left: auto;
   width: 350px;
-  height: 250px;
-  background: #151515;
-  color: #e0e0e0;
-  font-family: monospace;
-  border: 2px solid #333;
-  border-radius: 5px 5px 0 0;
-  display: flex; flex-direction: column;
-  z-index: 200;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  transition: height 0.3s ease;
-  position: relative;
+  height: 250px; /* restored full height */
+  background: transparent;
+  box-shadow: none;
 }
 .custom-terminal.minimized {
   height: 30px;
 }
 /* Realistic Custom Terminal Window */
 .custom-terminal {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: auto;
   width: 350px;
   height: 250px; /* restored full height */
   background: transparent;
@@ -288,6 +285,15 @@ body.dark-theme h2 { color: #cfcfcf !important; }
 /* Force minimized height override at end */
 .custom-terminal.minimized {
   height: 30px !important;
+}
+
+/* Override to pin custom terminal to viewport bottom-right */
+.custom-terminal {
+  position: fixed !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  left: auto !important;
+  z-index: 9999 !important;
 }
 
 @media (max-width: 600px) {
